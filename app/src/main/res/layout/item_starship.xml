@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16sp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="16sp">
+
+            <ImageView
+                android:id="@+id/iv_starship"
+                android:layout_width="50sp"
+                android:layout_height="50sp"
+                android:src="@drawable/ic_starship_dark_24dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/iv_starship"
+                android:orientation="vertical"
+                android:padding="16sp">
+
+                <TextView
+                    android:id="@+id/tv_starship_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Executor"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/colorPrimary"/>
+
+                <TextView
+                    android:id="@+id/tv_starship_model"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:text="Executor-class star dreadnought"
+                    android:textColor="@color/colorPrimary"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_starship_hyperdrive_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="3.0"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="16sp"
+                android:textColor="@color/colorPrimary"
+                android:textStyle="italic"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>

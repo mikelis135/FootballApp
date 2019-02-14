@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/action_planets"
+        android:enabled="true"
+        android:icon="@drawable/ic_planet_white_24dp"
+        android:title="@string/text_planets"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_schedules"
+        android:enabled="true"
+        android:icon="@drawable/ic_character_white_24dp"
+        android:title="@string/text_characters"
+        app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/action_music"
+        android:enabled="true"
+        android:icon="@drawable/ic_starship_white_24dp"
+        android:title="@string/text_starships"
+        app:showAsAction="ifRoom" />
+</menu>

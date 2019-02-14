@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Star Wars MVP</string>
+
+    <string name="text_planets">Planets</string>
+    <string name="text_characters">Characters</string>
+    <string name="text_starships">Starships</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
