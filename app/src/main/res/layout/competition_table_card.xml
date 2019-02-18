@@ -1,0 +1,84 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                                   android:layout_width="match_parent"
+                                                   android:padding="5dp"
+                                                   android:layout_height="wrap_content">
+
+    <androidx.cardview.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        card_view:cardCornerRadius="1dp"
+        card_view:cardElevation="2dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintCard"
+                android:layout_width="match_parent"
+                android:padding="10dp"
+                android:layout_height="70dp">
+
+            <TextView
+                    android:id="@+id/teamRank"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingLeft="5dp"
+                    android:gravity="center_vertical"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:text="@string/_1" />
+
+            <ImageView
+                    android:id="@+id/teamLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:paddingLeft="30dp"
+                     android:src="@drawable/ic_notifications_black_24dp"/>
+
+            <TextView
+                android:id="@+id/teamName"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:paddingLeft="10dp"
+                card_view:layout_constraintLeft_toRightOf="@id/teamLogo"
+                android:gravity="center_vertical"
+                android:textSize="16sp"
+                android:text="@string/stade_bretois" />
+
+            <TextView
+                    android:id="@+id/teamPoint1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="20dp"
+                    android:gravity="center_vertical"
+                    card_view:layout_constraintRight_toLeftOf="@id/teamPoint2"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/_35" />
+
+            <TextView
+                    android:id="@+id/teamPoint2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="20dp"
+                    android:gravity="center_vertical"
+                    card_view:layout_constraintRight_toLeftOf="@id/teamPoint3"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/_76" />
+
+            <TextView
+                    android:id="@+id/teamPoint3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:paddingRight="10dp"
+                    android:gravity="center_vertical"
+                    card_view:layout_constraintEnd_toEndOf="@id/constraintCard"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:text="@string/_93" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

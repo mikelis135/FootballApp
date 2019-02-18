@@ -1,0 +1,28 @@
+<resources>
+    <string name="app_name">Football</string>
+    <string name="title_fixture">Today\'s Fixtures</string>
+    <string name="title_competitions">Competitions</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="finished">FINISHED</string>
+    <string name="_19_00">19:00</string>
+    <string name="md_35">MD: 35</string>
+    <string name="stade_bretois">Stade Bretois</string>
+    <string name="clemrmont_foot_auvergene">Clemrmont Foot Auvergene</string>
+    <string name="_00">00</string>
+    <string name="_1">1</string>
+    <string name="_0">0</string>
+    <string name="competition_title">Premier League 2017/18</string>
+    <string name="tab_text_1">Table</string>
+    <string name="tab_text_2">Fixtures</string>
+    <string name="tab_text_3">Team</string>
+    <string name="action_settings">Settings</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="_93">93</string>
+    <string name="_76">76</string>
+    <string name="_35">35</string>
+    <string name="burnley_fc">Burnley FC</string>
+    <string name="competition">competition</string>
+    <string name="manchester_united_fc">Manchester United FC</string>
+    <string name="keeper">Keeper</string>
+    <string name="david_de_gea">David de Gea</string>
+</resources>
