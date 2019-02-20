@@ -6,10 +6,10 @@ import com.football.taiwo.football.Database.Tables.TablesEntity
 
 class CompetitionTablePresenter(var competitionView: CompetitionTableView, val competitionInteractor: CompetitionTableInteractor)  : CompetitionInteractor.handleEvents{
 
-//    fun loadTableCompetitions() {
-//        competitionInteractor.callTablecompetitions(::onCompetitionsTableLoaded)
-//        Log.d("okh", "loadingCompetitions")
-//    }
+    fun loadTableCompetitions() {
+        competitionInteractor.callTablecompetitions(::onCompetitionsTableLoaded)
+        Log.d("okh", "loadingStandings")
+    }
 
     override fun oncompetitionClick() {
        }

@@ -32,10 +32,10 @@ class HomeInteractor : AppCompatActivity() {
     fun callCompetitions(callback: (CompetitionEntity) -> Unit) {
            callback(createCompetitionList())
         }
-
-   fun callTable(callback: (TablesEntity) -> Unit) {
-           callback(createCompetitionTableModel(0))
-        }
+//
+//   fun callTable(callback: (TablesEntity) -> Unit) {
+//           callback(createCompetitionTableModel(0))
+//        }
 
     fun callTeam(callback: (TeamsEntity) -> Unit) {
            callback(createCompetitionTeamModel(0))
@@ -86,7 +86,6 @@ class HomeInteractor : AppCompatActivity() {
                                 if (results.matches.get(i).score.fullTime.awayTeam==null) {
                                     results.matches.get(i).score.fullTime.awayTeam = ""
                                     }
-
 
 
                                 fixtureEntity = FixtureEntity(
@@ -168,73 +167,84 @@ class HomeInteractor : AppCompatActivity() {
 }
 
     var teamsEntity =  TeamsEntity(0, "", "")
-    var tablesEntity =  TablesEntity(0, "", "", "", "", "", "", "")
+    //var tablesEntity =  TablesEntity(0, "", "", "", "", "", "", "")
 
-    fun createCompetitionTableModel(id : Int): TablesEntity {
-
-        doAsync {
-
-            Log.d("okh", id.toString()+"id clicked")
-            disposable = homeService.getTables("fb72bfd14ba7494da1ccf73acd38afdd", id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
-
-                    var count = results.standings.size
-                    var standing = results.standings
-                    if (count != null) {
-                        for (i in 1 until standing.get(count).table.size) {
-
-                            if (results.standings.get(i).table.get(i).position==null){
-                                results.standings.get(i).table.get(i).position = 0
-                            }
-                            if (results.standings.get(i).table.get(i).team.name==null){
-                                results.standings.get(i).table.get(i).team.name = ""
-                            }
-                            if (results.standings.get(i).table.get(i).team.crestUrl==null){
-                                results.standings.get(i).table.get(i).team.crestUrl = ""
-                            }
-                            if (results.standings.get(i).table.get(i).playedGames==null){
-                                results.standings.get(i).table.get(i).playedGames = 0
-                            }
-                            if (results.standings.get(i).table.get(i).goalsFor==null){
-                                results.standings.get(i).table.get(i).goalsFor = 0
-                            }
-                             if (results.standings.get(i).table.get(i).points==null){
-                                 results.standings.get(i).table.get(i).points = 0
-                            }
-
-                            tablesEntity = TablesEntity(
-                                results.standings.get(i).table.get(i).position,
-                                results.standings.size.toString(),
-                                results.standings.get(i).table.get(i).position.toString(), results.standings.get(i).table.get(i).team.name,
-                                results.standings.get(i).table.get(i).team.crestUrl, results.standings.get(i).table.get(i).playedGames.toString(),
-                                results.standings.get(i).table.get(i).goalsFor.toString(), results.standings.get(i).table.get(i).points.toString()
-                            )
-
-                            doAsync {
-                                App.getInstance(this@HomeInteractor).tablesDao().insert(tablesEntity)
-                                uiThread {
-
-                                }
-                            }
-                        }
-                        Log.d("okh", tablesEntity.toString())
-
-                    }
-
-                },
-                    {
-                        Log.d("okh", "" + it.message.toString())
-                    }
-                )
-            uiThread {
-
-            }
-        }
-
-        return tablesEntity
-    }
+//    fun createCompetitionTableModel(id : Int): TablesEntity {
+//
+//        doAsync {
+//
+//            Log.d("okh", id.toString()+"id clicked")
+//            disposable = homeService.getTables("fb72bfd14ba7494da1ccf73acd38afdd", id)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe({ results ->
+//
+//                    var count = results.standings.size
+//                    var standing = results.standings
+//                    Log.d("okh", standing.get(count).table.size.toString()+" the size")
+//                    if (count != null) {
+//                        for (i in 1 until standing.get(count).table.size) {
+//
+//                            if (results.standings.get(i).table.get(i).position==null){
+//                                results.standings.get(i).table.get(i).position = 0
+//                            }
+//                            if (results.standings.get(i).table.get(i).team.name==null){
+//                                results.standings.get(i).table.get(i).team.name = ""
+//                            }
+//                            if (results.standings.get(i).table.get(i).team.crestUrl==null){
+//                                results.standings.get(i).table.get(i).team.crestUrl = ""
+//                            }
+//                            if (results.standings.get(i).table.get(i).playedGames==null){
+//                                results.standings.get(i).table.get(i).playedGames = 0
+//                            }
+//                            if (results.standings.get(i).table.get(i).goalsFor==null){
+//                                results.standings.get(i).table.get(i).goalsFor = 0
+//                            }
+//                             if (results.standings.get(i).table.get(i).points==null){
+//                                 results.standings.get(i).table.get(i).points = 0
+//                            }
+//
+//                            tablesEntity = TablesEntity(
+//                                results.standings.get(i).table.get(i).position,
+//                                results.standings.size.toString(),
+//                                results.standings.get(i).table.get(i).position.toString(), results.standings.get(i).table.get(i).team.name,
+//                                results.standings.get(i).table.get(i).team.crestUrl, results.standings.get(i).table.get(i).playedGames.toString(),
+//                                results.standings.get(i).table.get(i).goalsFor.toString(), results.standings.get(i).table.get(i).points.toString()
+//                            )
+//                            Log.d("okh", tablesEntity.toString()+" from home interactor")
+//                            doAsync {
+//                                Log.d("okh", tablesEntity.toString()+" in async from home interactor")
+//
+//                                App.getInstance(this@HomeInteractor).tablesDao().insert(tablesEntity)
+//                                val list = App.getInstance(this@HomeInteractor).tablesDao().allTables()
+//                                var tablesList : MutableList<TablesEntity> = ArrayList()
+//                                uiThread {
+//
+//                                    for (football in 0 until list.size) {
+//                                        tablesList.add(football, list.get(football))
+//                                        // toast(list.get(football).fixtureAwayTeam)
+//                                        Log.d("okh", tablesList.toString()+" from home interactor")
+//
+//                                    }
+//                                }
+//                            }
+//                        }
+//                        Log.d("okh", tablesEntity.toString()+" sd")
+//
+//                    }
+//
+//                },
+//                    {
+//                        Log.d("okh", "" + it.message.toString())
+//                    }
+//                )
+//            uiThread {
+//
+//            }
+//        }
+//
+//        return tablesEntity
+//    }
 
     fun createCompetitionTeamModel(id : Int): TeamsEntity {
 

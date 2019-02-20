@@ -37,17 +37,17 @@ class HomePresenter( var homeView : HomeView, val homeInteractor: HomeInteractor
     }
 
      fun onCompetitionItemClicked(position: Int, item: MutableList<CompetitionEntity>){
-         homeInteractor.createCompetitionTableModel(item.get(position).competitionID)
          //homeInteractor.createCompetitionTeamModel(item.get(position).competitionID)
          Log.d("okh", item.get(position).competitionID.toString()+" clickcomp")
          homeView.apply {
+//             homeInteractor.createCompetitionTableModel(item.get(position).competitionID)
              openCompetitionsPage(item.get(position).competitionID, item.get(position).competitionName)
 
          }
         }
 
     fun onTableLoaded(position: Int, item: MutableList<TablesEntity>){
-        homeInteractor.createCompetitionTableModel(item.get(position).tablesID)
+      //  homeInteractor.createCompetitionTableModel(item.get(position).tablesID)
         //homeInteractor.createCompetitionTeamModel(item.get(position).competitionID)
         Log.d("okh", item.get(position).name.toString()+" clickcomp")
         homeView.apply {

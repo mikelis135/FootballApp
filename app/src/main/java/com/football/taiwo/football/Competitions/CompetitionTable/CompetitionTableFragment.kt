@@ -31,11 +31,31 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
     }
 
     override fun onResume() {
-
+        callTable()
         super.onResume()
     }
 
     override fun setTable(items: TablesEntity) {
+        var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
+        rootView!!.competitionRecylerView.layoutManager = mLayoutManager
+
+        var tablesList : MutableList<TablesEntity> = ArrayList()
+        doAsync {
+            val list = App.getInstance(activity!!.applicationContext).tablesDao().allTables()
+            uiThread {
+                for (football in 0 until list.size) {
+                    tablesList.add(football, list.get(football))
+                    // toast(list.get(football).fixtureAwayTeam)
+                    Log.d("okh", tablesList.get(football).name+" from table fragment")
+                    var tableAdapter = CompetitionTableAdapter(activity, tablesList, competitionTablePresenter::onCompetitionTableClicked)
+                    competitionRecylerView.adapter = tableAdapter
+                }
+
+            }
+        }
+    }
+
+    fun callTable(){
         var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
         rootView!!.competitionRecylerView.layoutManager = mLayoutManager
 

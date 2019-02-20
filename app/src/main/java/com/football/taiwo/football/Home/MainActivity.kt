@@ -93,6 +93,7 @@ class MainActivity : AppCompatActivity(), HomeView{
         intent.putExtra(getString(R.string.competition), competition.toString())
         intent.putExtra(getString(R.string.competition_title), competitionName)
         startActivity(intent)
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
