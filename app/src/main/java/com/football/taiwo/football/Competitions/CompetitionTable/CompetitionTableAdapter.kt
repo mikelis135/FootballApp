@@ -62,14 +62,14 @@ class CompetitionTableAdapter() : androidx.recyclerview.widget.RecyclerView.Adap
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = competitionTableList!!.get(position)
         holder.teamRank!!.text = item.tablesPosition
-//        Glide.with(context)
-//            .load(item.crestUrl)
-//            .thumbnail(0.5f)
-//            .override(200, 200)
-//            .diskCacheStrategy(DiskCacheStrategy.ALL)
-//            .into(holder.teamLogo)
+        Glide.with(context)
+            .load(item.crestUrl)
+            .thumbnail(0.5f)
+            .override(200, 200)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.teamLogo)
         holder.teamName!!.text = item.name
-        Log.d("okh", item.name+" from team adapter")
+        Log.d("okh", item.crestUrl+" from table adapter")
         holder.teamPoint1!!.text = item.playedGames
         holder.teamPoint2!!.text = item.goalsFor
         holder.teamPoint3!!.text = item.points

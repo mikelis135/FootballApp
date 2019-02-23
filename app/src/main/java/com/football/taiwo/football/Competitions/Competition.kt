@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.fragment.app.Fragment
 import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureModel
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableFragment
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableView
@@ -22,7 +23,8 @@ import com.football.taiwo.football.R
 import kotlinx.android.synthetic.main.activity_competition.*
 
 class Competition : AppCompatActivity(), CompetitionTableView {
-    override fun setTable(items: MutableList<TablesEntity>) {
+
+    override fun setTable(competitionId: Int) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
@@ -43,16 +45,19 @@ class Competition : AppCompatActivity(), CompetitionTableView {
     }
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
-    val competitionID : Int = 0
+    companion object {
+        var competitionID : Int = 0
+    }
     lateinit var context : Context
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_competition)
         setSupportActionBar(toolbar)
         val competitionTitle = intent
-        val competitionID = competitionTitle.getStringExtra(getString(R.string.competition))
+
+        competitionID = competitionTitle.getStringExtra(getString(R.string.competition)).toInt()
         val competitionName = competitionTitle.getStringExtra(getString(R.string.competition_title))
-        Log.d("okh", competitionID + " " + competitionName)
+        Log.d("okh", "$competitionID $competitionName")
 
         title = competitionName
         supportActionBar!!.setTitle(competitionName)
@@ -65,6 +70,17 @@ class Competition : AppCompatActivity(), CompetitionTableView {
         competitionContainer.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
         tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(competitionContainer))
 
+    }
+
+    override fun onResume() {
+        mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
+
+        // Set up the ViewPager with the sections adapter.
+        competitionContainer.adapter = mSectionsPagerAdapter
+        // loadTableCompetitions
+        competitionContainer.addOnPageChangeListener(TabLayout.TabLayoutOnPageChangeListener(tabs))
+        tabs.addOnTabSelectedListener(TabLayout.ViewPagerOnTabSelectedListener(competitionContainer))
+        super.onResume()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -85,16 +101,17 @@ class Competition : AppCompatActivity(), CompetitionTableView {
     inner class SectionsPagerAdapter(fm: androidx.fragment.app.FragmentManager) : androidx.fragment.app.FragmentPagerAdapter(fm) {
 
         override fun getItem(position: Int): androidx.fragment.app.Fragment {
+            var fragment : Fragment? = null
             if (position==0) {
-                return CompetitionTableFragment.newInstance(competitionID)
+                fragment = CompetitionTableFragment.newInstance(competitionID)
             }
             else if (position==1) {
-                return CompetitionTableFragment.newInstance(competitionID)
+                fragment = CompetitionTableFragment.newInstance(competitionID)
             }
             else if (position==2) {
-                return CompetitionTeamFragment.newInstance(competitionID)
+                fragment = CompetitionTeamFragment.newInstance(competitionID)
             }
-            return CompetitionTableFragment.newInstance(competitionID)
+            return fragment!!
         }
 
         override fun getCount(): Int {

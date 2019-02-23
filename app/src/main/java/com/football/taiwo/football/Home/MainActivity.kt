@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity(), HomeView{
             uiThread {
                 for (football in 0 until list.size) {
                     listfootball.add(football, list.get(football))
-                    //    toast(list.get(football).competitionName)
                 }
                 var homeAdapter = CompetitionAdapter(this@MainActivity, listfootball, homePresenter::onCompetitionItemClicked)
                 homeRecylerView.adapter = homeAdapter

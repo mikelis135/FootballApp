@@ -5,12 +5,13 @@ import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFi
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamView
 import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
+import com.football.taiwo.football.Database.Team.TeamsEntity
 
 class CompetitionTeamPresenter(var competitionTeamView: CompetitionTeamView, val competitionInteractor: CompetitionTeamInteractor)  : CompetitionInteractor.handleEvents{
 
-    fun loadTeamCompetitions() {
-        competitionInteractor.callTeamcompetitions(::onCompetitionsTeamLoaded)
-        Log.d("okh", "loadingCompetitions")
+    fun loadTeamCompetitions(competitionId: Int) {
+        competitionInteractor.callTeamcompetitions(competitionId,::onCompetitionsTeamLoaded)
+        Log.d("okh", "loadingStandings")
     }
 
     override fun oncompetitionClick() {
@@ -22,17 +23,18 @@ class CompetitionTeamPresenter(var competitionTeamView: CompetitionTeamView, val
     override fun onLoadFinished() {
      }
 
-    private fun onCompetitionsTeamLoaded(items: MutableList<CompetitionTeamModel>) {
+    private fun onCompetitionsTeamLoaded(competitionId : Int) {
         competitionTeamView.apply {
-            setTeams(items)
+            setTeams(competitionId)
+            Log.d("okh", competitionId.toString() + " presenter")
         }
-
     }
 
-    fun onCompetitionTeamClicked(position: Int, item: MutableList<CompetitionTeamModel>){
+
+    fun onCompetitionTeamClicked(position: Int, item: MutableList<TeamsEntity>){
             Log.d("okh", item.get(position).teamName+" team click")
          competitionTeamView.apply {
-             openTeamPlayerPage(position, item.get(position))
+             openTeamPlayerPage(position, item)
          }
         }
 

@@ -2,6 +2,7 @@ package com.football.taiwo.football.Home
 
 import com.football.taiwo.football.Apimodel.Competitions.HomeCompetitionModel
 import com.football.taiwo.football.Apimodel.Player35.Match35
+import com.football.taiwo.football.Apimodel.Players.TeamPlayerModel
 import com.football.taiwo.football.Apimodel.Tables.TableModel
 import com.football.taiwo.football.Apimodel.Teams.TeamModel
 import io.reactivex.Observable
@@ -21,7 +22,10 @@ interface HomeService {
      fun getTables(@Header("X-Auth-Token") apiKey : String, @Path("id") id : Int): Observable<TableModel>
 
     @GET("/v2/competitions/{id}/teams")
-     fun getTeam(@Header("X-Auth-Token") apiKey : String, @Path("id") id : Int): Observable<TeamModel>
+     fun getTeams(@Header("X-Auth-Token") apiKey : String, @Path("id") id : Int): Observable<TeamModel>
+
+    @GET("/v2/competitions/teams/{id}")
+    fun getTeamPlayers(@Header("X-Auth-Token") apiKey : String, @Path("id") id : Int): Observable<TeamPlayerModel>
 
 
 }

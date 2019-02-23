@@ -36,18 +36,18 @@ class CompetitionInteractor : AppCompatActivity(){
 
      private fun createCompetitionTableModel(): MutableList<TablesEntity>  {
          var tablesList : MutableList<TablesEntity> = ArrayList()
-         doAsync {
-             val list = App.getInstance(applicationContext).tablesDao().allTables()
-             uiThread {
-                 for (football in 0 until list.size) {
-                     tablesList.add(football, list.get(football))
-                     // toast(list.get(football).fixtureAwayTeam)
-                     Log.d("okh", tablesList.toString()+" from table fragment")
-
-                 }
-
-             }
-         }
+//         doAsync {
+//             val list = App.getInstance(applicationContext).tablesDao().allTables()
+//             uiThread {
+//                 for (football in 0 until list.size) {
+//                     tablesList.add(football, list.get(football))
+//                     // toast(list.get(football).fixtureAwayTeam)
+//                     Log.d("okh", tablesList.toString()+" from table fragment")
+//
+//                 }
+//
+//             }
+//         }
     return tablesList
 }
 

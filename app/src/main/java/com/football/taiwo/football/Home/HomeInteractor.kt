@@ -32,15 +32,6 @@ class HomeInteractor : AppCompatActivity() {
     fun callCompetitions(callback: (CompetitionEntity) -> Unit) {
            callback(createCompetitionList())
         }
-//
-//   fun callTable(callback: (TablesEntity) -> Unit) {
-//           callback(createCompetitionTableModel(0))
-//        }
-
-    fun callTeam(callback: (TeamsEntity) -> Unit) {
-           callback(createCompetitionTeamModel(0))
-        }
-
 
     private val homeService by lazy {
         Apicalls.create()
@@ -165,60 +156,6 @@ class HomeInteractor : AppCompatActivity() {
 
         return competitionEntity
 }
-
-    var teamsEntity =  TeamsEntity(0, "", "")
-
-    fun createCompetitionTeamModel(id : Int): TeamsEntity {
-
-        doAsync {
-
-            Log.d("okh", id.toString()+"id clicked")
-            disposable = homeService.getTeam("fb72bfd14ba7494da1ccf73acd38afdd", id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
-
-                    var count = results.count
-                    var teams = results.teams
-                    if (count != null) {
-                        for (i in 1 until count) {
-
-                            if (results.teams.get(i).id==null){
-                                results.teams.get(i).id = 0
-                            }
-                            if (results.teams.get(i).name==null){
-                                results.teams.get(i).name = ""
-                            }
-                            if (results.teams.get(i).crestUrl==null){
-                                results.teams.get(i).crestUrl = ""
-                            }
-
-                            teamsEntity = TeamsEntity(results.teams.get(i).id, results.teams.get(i).name, results.teams.get(i).crestUrl)
-
-                            doAsync {
-                                App.getInstance(this@HomeInteractor).teamsDao().insert(teamsEntity)
-                                uiThread {
-
-                                }
-                            }
-                        }
-                        Log.d("okh", teamsEntity.toString())
-
-                    }
-
-                },
-                    {
-                        Log.d("okh", "" + it.message.toString())
-                    }
-                )
-            uiThread {
-
-            }
-        }
-
-        return teamsEntity
-    }
-
 
 }
 

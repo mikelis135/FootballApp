@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.football.taiwo.football.App
+import com.football.taiwo.football.Competitions.Competition.Companion.competitionID
 import com.football.taiwo.football.Database.Competition.CompetitionEntity
 import com.football.taiwo.football.Database.Tables.TablesEntity
 import com.football.taiwo.football.Home.CompetitionTableInteractor
@@ -31,16 +32,35 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
     }
 
     override fun onResume() {
-
+        callTable()
+       // CompetitionTableFragment.newInstance(competitionID)
         super.onResume()
     }
 
     override fun setTable(competitionId :  Int) {
         doAsync {
-           var tablesList =   App.getInstance(context!!).tablesDao().allTables(competitionId)
+           var tablesList =   App.getInstance(context!!).tablesDao().allTables(competitionID)
             uiThread {
 
                  var tablesEntity : MutableList<TablesEntity> = ArrayList()
+                for (football in 0 until tablesList.size) {
+                    tablesEntity.add(football, tablesList.get(football))
+                    Log.d("okh", tablesList.get(football).name+" from table fragment")
+
+                    var tableAdapter = CompetitionTableAdapter(activity, tablesEntity, competitionTablePresenter::onCompetitionTableClicked)
+                    rootView!!.competitionRecylerView.adapter = tableAdapter
+                }
+
+            }
+        }
+    }
+
+    fun callTable(){
+        doAsync {
+            var tablesList =   App.getInstance(context!!).tablesDao().allTables(competitionID)
+            uiThread {
+
+                var tablesEntity : MutableList<TablesEntity> = ArrayList()
                 for (football in 0 until tablesList.size) {
                     tablesEntity.add(football, tablesList.get(football))
                     Log.d("okh", tablesList.get(football).name+" from table fragment")
@@ -61,7 +81,8 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
         rootView = inflater.inflate(R.layout.fragment_competition_table, container, false)
         var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
         rootView!!.competitionRecylerView.layoutManager = mLayoutManager
-        competitionTablePresenter.loadTableCompetitions()
+        Log.d("okh", competitionID.toString() + " fragment")
+        competitionTablePresenter.loadTableCompetitions(competitionID)
         rootView!!.section_label.text = getString(
             R.string.section_format, arguments?.getInt(
                 ARG_SECTION_NUMBER

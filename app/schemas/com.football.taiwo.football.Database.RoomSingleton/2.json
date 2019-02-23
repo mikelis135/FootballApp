@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "d1b3556f7931e1e7da69c7fa8f2241de",
+    "identityHash": "8bca9726817827fc434129a38ebacd59",
     "entities": [
       {
         "tableName": "footballTable",
@@ -94,7 +94,7 @@
       },
       {
         "tableName": "tablesTable",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `count` TEXT NOT NULL, `position` TEXT NOT NULL, `name` TEXT NOT NULL, `crestUrl` TEXT NOT NULL, `playedGames` TEXT NOT NULL, `goalsFor` TEXT NOT NULL, `points` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `count` TEXT NOT NULL, `competition` INTEGER NOT NULL, `position` TEXT NOT NULL, `name` TEXT NOT NULL, `crestUrl` TEXT NOT NULL, `playedGames` TEXT NOT NULL, `goalsFor` TEXT NOT NULL, `points` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "tablesID",
@@ -106,6 +106,12 @@
             "fieldPath": "tablesCount",
             "columnName": "count",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "competition",
+            "columnName": "competition",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -156,7 +162,7 @@
       },
       {
         "tableName": "teamsTable",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `crestUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `competition` INTEGER NOT NULL, `crestUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "tablesID",
@@ -168,6 +174,12 @@
             "fieldPath": "teamName",
             "columnName": "name",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "competition",
+            "columnName": "competition",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -189,7 +201,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"d1b3556f7931e1e7da69c7fa8f2241de\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8bca9726817827fc434129a38ebacd59\")"
     ]
   }
 }

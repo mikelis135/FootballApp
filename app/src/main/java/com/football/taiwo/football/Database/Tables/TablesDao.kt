@@ -9,8 +9,8 @@ import com.football.taiwo.football.Database.Tables.TablesEntity
 @Dao
 interface TablesDao{
     @Query("SELECT * FROM tablesTable WHERE competition LIKE :competitionid order by id")
-    fun allTables(competitionid : Int):List<TablesEntity>
+    abstract fun allTables(competitionid : Int):List<TablesEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(competition : Int, tablesEntity: TablesEntity)
+    fun insert(tablesEntity: TablesEntity)
 }

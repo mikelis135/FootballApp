@@ -11,16 +11,17 @@ import android.widget.ImageView
 import android.widget.TextView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.football.taiwo.football.Database.Team.TeamsEntity
 import com.football.taiwo.football.R
 
 class CompetitionTeamAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<CompetitionTeamAdapter.MyViewHolder>() {
 
     var context : Context? = null
-    var competitionTeamList : MutableList<CompetitionTeamModel>? = null
-    lateinit var listener : (Int, MutableList<CompetitionTeamModel>) -> Unit
+    var competitionTeamList : MutableList<TeamsEntity>? = null
+    lateinit var listener : (Int, MutableList<TeamsEntity>) -> Unit
 
 
-    constructor(context: Context?, competitionTeamList: MutableList<CompetitionTeamModel>?, listener : (Int, MutableList<CompetitionTeamModel>) -> Unit) : this() {
+    constructor(context: Context?, competitionTeamList: MutableList<TeamsEntity>?, listener : (Int, MutableList<TeamsEntity>) -> Unit) : this() {
         this.context = context
         this.competitionTeamList = competitionTeamList
         this.listener = listener
@@ -53,15 +54,16 @@ class CompetitionTeamAdapter() : androidx.recyclerview.widget.RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = competitionTeamList!![position]
-//        Glide.with(context)
-//            .load(item.teamLogoUrl)
-//            .thumbnail(0.5f)
-//            .override(200, 200)
-//            .diskCacheStrategy(DiskCacheStrategy.ALL)
-//            .into(holder.competitionTeamLogo)
-        Log.d("okh", item.teamName+" from team adapter")
-       // holder.competitionTeamLogo!!.setImageResource(R.mipmap.ic_launcher_round)
+        val item = competitionTeamList!!.get(position)
+        Log.d("okh", competitionTeamList.toString() +" adapts")
+        Glide.with(context)
+            .load(item.crestUrl)
+            .thumbnail(0.5f)
+            .override(200, 200)
+            .diskCacheStrategy(DiskCacheStrategy.ALL)
+            .into(holder.competitionTeamLogo)
+        Log.d("okh", item.teamName+" from team" + item.tablesID +" team id")
+        holder.competitionTeamLogo!!.setImageResource(R.mipmap.ic_launcher_round)
         holder.competitionTeamName!!.text = item.teamName
         holder.card_view!!.setOnClickListener { listener(position, competitionTeamList!!) }
     }
