@@ -22,6 +22,9 @@ import com.football.taiwo.football.R
 import kotlinx.android.synthetic.main.activity_competition.*
 
 class Competition : AppCompatActivity(), CompetitionTableView {
+    override fun setTable(items: MutableList<TablesEntity>) {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
     private val competitionPresenter = CompetitionTablePresenter(this, CompetitionTableInteractor())
 
@@ -34,9 +37,6 @@ class Competition : AppCompatActivity(), CompetitionTableView {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun setTable(items: TablesEntity) {
-       // competitionPresenter.loadTableCompetitions()
-    }
 
     override fun getItemClicked(position: Int, item: MutableList<CompetitionEntity>) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
@@ -86,7 +86,6 @@ class Competition : AppCompatActivity(), CompetitionTableView {
 
         override fun getItem(position: Int): androidx.fragment.app.Fragment {
             if (position==0) {
-                competitionPresenter.loadTableCompetitions()
                 return CompetitionTableFragment.newInstance(competitionID)
             }
             else if (position==1) {

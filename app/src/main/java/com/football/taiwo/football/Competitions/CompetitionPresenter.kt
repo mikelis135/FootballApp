@@ -11,7 +11,7 @@ import com.football.taiwo.football.Database.Tables.TablesEntity
 class CompetitionPresenter(var competitionView: CompetitionView, val competitionInteractor: CompetitionInteractor)  : CompetitionInteractor.handleEvents{
 
     fun loadTableCompetitions() {
-        competitionInteractor.callTablecompetitions(::onCompetitionsTableLoaded)
+      //  competitionInteractor.callTablecompetitions(::onCompetitionsTableLoaded)
         Log.d("okh", "loadingCompetitions")
     }
 

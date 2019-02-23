@@ -101,6 +101,7 @@ class MainActivity : AppCompatActivity(), HomeView{
         setContentView(R.layout.activity_main)
         var mLayoutManager = GridLayoutManager(this, 1)
         homeRecylerView.layoutManager = mLayoutManager
+
         homePresenter.loadFixtures()
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
     }

@@ -31,44 +31,22 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
     }
 
     override fun onResume() {
-        callTable()
+
         super.onResume()
     }
 
-    override fun setTable(items: TablesEntity) {
-        var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
-        rootView!!.competitionRecylerView.layoutManager = mLayoutManager
-
-        var tablesList : MutableList<TablesEntity> = ArrayList()
+    override fun setTable(competitionId :  Int) {
         doAsync {
-            val list = App.getInstance(activity!!.applicationContext).tablesDao().allTables()
+           var tablesList =   App.getInstance(context!!).tablesDao().allTables(competitionId)
             uiThread {
-                for (football in 0 until list.size) {
-                    tablesList.add(football, list.get(football))
-                    // toast(list.get(football).fixtureAwayTeam)
+
+                 var tablesEntity : MutableList<TablesEntity> = ArrayList()
+                for (football in 0 until tablesList.size) {
+                    tablesEntity.add(football, tablesList.get(football))
                     Log.d("okh", tablesList.get(football).name+" from table fragment")
-                    var tableAdapter = CompetitionTableAdapter(activity, tablesList, competitionTablePresenter::onCompetitionTableClicked)
-                    competitionRecylerView.adapter = tableAdapter
-                }
 
-            }
-        }
-    }
-
-    fun callTable(){
-        var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
-        rootView!!.competitionRecylerView.layoutManager = mLayoutManager
-
-        var tablesList : MutableList<TablesEntity> = ArrayList()
-        doAsync {
-            val list = App.getInstance(activity!!.applicationContext).tablesDao().allTables()
-            uiThread {
-                for (football in 0 until list.size) {
-                    tablesList.add(football, list.get(football))
-                    // toast(list.get(football).fixtureAwayTeam)
-                    Log.d("okh", tablesList.toString()+" from table fragment")
-                    var tableAdapter = CompetitionTableAdapter(activity, tablesList, competitionTablePresenter::onCompetitionTableClicked)
-                    competitionRecylerView.adapter = tableAdapter
+                    var tableAdapter = CompetitionTableAdapter(activity, tablesEntity, competitionTablePresenter::onCompetitionTableClicked)
+                    rootView!!.competitionRecylerView.adapter = tableAdapter
                 }
 
             }
@@ -80,26 +58,10 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle? ): View? {
-
         rootView = inflater.inflate(R.layout.fragment_competition_table, container, false)
-        Log.d("okh", " from table fragment")
         var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
         rootView!!.competitionRecylerView.layoutManager = mLayoutManager
-        var tablesList : MutableList<TablesEntity> = ArrayList()
-        doAsync {
-            val list = App.getInstance(activity!!.applicationContext).tablesDao().allTables()
-            uiThread {
-                for (football in 0 until list.size) {
-                    tablesList.add(football, list.get(football))
-                    // toast(list.get(football).fixtureAwayTeam)
-                    Log.d("okh", tablesList.toString()+" d from table fragment")
-
-                }
-                var tableAdapter = CompetitionTableAdapter(activity, tablesList, competitionTablePresenter::onCompetitionTableClicked)
-                competitionRecylerView.adapter = tableAdapter
-
-            }
-        }
+        competitionTablePresenter.loadTableCompetitions()
         rootView!!.section_label.text = getString(
             R.string.section_format, arguments?.getInt(
                 ARG_SECTION_NUMBER

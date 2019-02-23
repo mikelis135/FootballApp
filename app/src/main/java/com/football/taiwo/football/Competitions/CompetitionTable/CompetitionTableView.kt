@@ -6,6 +6,6 @@ import com.football.taiwo.football.Database.Tables.TablesEntity
 interface CompetitionTableView {
     fun showShimmer()
     fun stopShimmer()
-    fun setTable(items: TablesEntity)
+    fun setTable(competitionId : Int)
     fun getItemClicked(position: Int, item: MutableList<CompetitionEntity>)
 }

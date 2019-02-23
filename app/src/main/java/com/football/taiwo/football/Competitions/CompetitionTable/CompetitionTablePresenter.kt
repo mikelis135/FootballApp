@@ -21,9 +21,10 @@ class CompetitionTablePresenter(var competitionView: CompetitionTableView, val c
      }
 
 
-     private fun onCompetitionsTableLoaded(items: TablesEntity) {
+     private fun onCompetitionsTableLoaded(competitionId : Int) {
         competitionView.apply {
-            setTable(items)
+            setTable(competitionId)
+            Log.d("okh", competitionId.toString() + " presenter")
         }
     }
 

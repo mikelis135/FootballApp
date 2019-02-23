@@ -14,6 +14,9 @@ data class TablesEntity(
     @ColumnInfo(name = "count")
     var tablesCount: String,
 
+    @ColumnInfo(name = "competition")
+    var competition: Int,
+
     @ColumnInfo(name = "position")
     var tablesPosition: String,
 
