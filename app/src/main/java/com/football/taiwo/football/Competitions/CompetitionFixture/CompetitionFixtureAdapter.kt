@@ -1,8 +1,6 @@
 package com.football.taiwo.football.Competitions.CompetitionFixture
 
 import android.content.Context
-import androidx.cardview.widget.CardView
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

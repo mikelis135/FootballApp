@@ -12,8 +12,6 @@ import com.football.taiwo.football.Database.Tables.TablesEntity
 import com.football.taiwo.football.Home.CompetitionTableInteractor
 import com.football.taiwo.football.Home.CompetitionTablePresenter
 import com.football.taiwo.football.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.fragment_competition_table.*
 import kotlinx.android.synthetic.main.fragment_competition_table.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

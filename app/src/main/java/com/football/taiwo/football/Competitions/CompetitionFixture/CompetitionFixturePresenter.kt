@@ -3,10 +3,6 @@ package com.football.taiwo.football.Home
 import android.util.Log
 import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureModel
 import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureView
-import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableModel
-import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
-import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
-import com.football.taiwo.football.Competitions.CompetitionView
 
 class CompetitionFixturePresenter(var competitionView: CompetitionFixtureView, val competitionInteractor: CompetitionFixtureInteractor)  : CompetitionInteractor.handleEvents{
 

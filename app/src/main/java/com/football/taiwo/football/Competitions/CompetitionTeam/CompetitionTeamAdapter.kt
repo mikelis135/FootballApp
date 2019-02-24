@@ -2,8 +2,6 @@ package com.football.taiwo.football.Competitions.CompetitionTeam
 
 import android.content.Context
 import android.util.Log
-import androidx.cardview.widget.CardView
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,6 +58,7 @@ class CompetitionTeamAdapter() : androidx.recyclerview.widget.RecyclerView.Adapt
             .load(item.crestUrl)
             .thumbnail(0.5f)
             .override(200, 200)
+            .placeholder(R.drawable.ic_placeholder)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.competitionTeamLogo)
         Log.d("okh", item.teamName+" from team" + item.tablesID +" team id")

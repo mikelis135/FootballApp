@@ -2,18 +2,14 @@ package com.football.taiwo.football.Home
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.football.taiwo.football.Apimodel.Teams.Team
 import com.football.taiwo.football.App
 import com.football.taiwo.football.Database.Competition.CompetitionEntity
 import com.football.taiwo.football.Database.Fixture.FixtureEntity
-import com.football.taiwo.football.Database.Tables.TablesEntity
-import com.football.taiwo.football.Database.Team.TeamsEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
-import java.util.*
 
 class HomeInteractor : AppCompatActivity() {
 

@@ -2,23 +2,15 @@ package com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer
 
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.GridLayoutManager
 import com.football.taiwo.football.App
-import com.football.taiwo.football.Competitions.Competition
-import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamAdapter
-import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
 import com.football.taiwo.football.Competitions.teamPlayer.TeamPlayer.TeamPlayerAdapter
 import com.football.taiwo.football.Database.Team.TeamPlayersEntity
 import com.football.taiwo.football.Database.Team.TeamsEntity
 import com.football.taiwo.football.Home.TeamPlayerInteractor
 import com.football.taiwo.football.Home.TeamPlayerPresenter
 import com.football.taiwo.football.R
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_team_player.*
-import kotlinx.android.synthetic.main.fragment_competition_team.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread
 

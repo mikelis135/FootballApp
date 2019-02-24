@@ -3,10 +3,7 @@ package com.football.taiwo.football.Home
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.football.taiwo.football.App
-import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
-import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
 import com.football.taiwo.football.Database.Team.TeamPlayersEntity
-import com.football.taiwo.football.Database.Team.TeamsEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync

@@ -2,17 +2,9 @@ package com.football.taiwo.football.Home
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.football.taiwo.football.App
-import com.football.taiwo.football.App.Companion.context
 import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureModel
-import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableAdapter
-import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableModel
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
 import com.football.taiwo.football.Database.Tables.TablesEntity
-import com.football.taiwo.football.R.id.competitionRecylerView
-import kotlinx.android.synthetic.main.fragment_competition_table.*
-import org.jetbrains.anko.doAsync
-import org.jetbrains.anko.uiThread
 
 class CompetitionInteractor : AppCompatActivity(){
 

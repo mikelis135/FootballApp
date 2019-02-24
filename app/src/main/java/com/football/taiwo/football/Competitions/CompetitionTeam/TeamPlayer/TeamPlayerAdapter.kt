@@ -2,14 +2,10 @@ package com.football.taiwo.football.Competitions.teamPlayer.TeamPlayer
 
 import android.content.Context
 import android.util.Log
-import androidx.cardview.widget.CardView
-import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import android.widget.TextView
-import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
 import com.football.taiwo.football.Database.Team.TeamPlayersEntity
 import com.football.taiwo.football.R
 

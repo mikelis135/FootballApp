@@ -66,6 +66,7 @@ class CompetitionTableAdapter() : androidx.recyclerview.widget.RecyclerView.Adap
             .load(item.crestUrl)
             .thumbnail(0.5f)
             .override(200, 200)
+            .placeholder(R.drawable.ic_placeholder)
             .diskCacheStrategy(DiskCacheStrategy.ALL)
             .into(holder.teamLogo)
         holder.teamName!!.text = item.name

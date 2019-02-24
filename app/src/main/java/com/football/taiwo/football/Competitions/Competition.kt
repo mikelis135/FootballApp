@@ -2,24 +2,19 @@ package com.football.taiwo.football.Competitions
 
 import android.content.Context
 import android.os.Bundle
-import com.google.android.material.tabs.TabLayout
-import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureModel
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableFragment
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableView
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamFragment
-import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
 import com.football.taiwo.football.Database.Competition.CompetitionEntity
-import com.football.taiwo.football.Database.Tables.TablesEntity
 import com.football.taiwo.football.Home.CompetitionTableInteractor
 import com.football.taiwo.football.Home.CompetitionTablePresenter
-import com.football.taiwo.football.Home.HomeInteractor
-import com.football.taiwo.football.Home.HomePresenter
 import com.football.taiwo.football.R
+import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_competition.*
 
 class Competition : AppCompatActivity(), CompetitionTableView {

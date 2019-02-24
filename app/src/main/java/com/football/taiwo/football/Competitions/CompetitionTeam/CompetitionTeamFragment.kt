@@ -13,7 +13,6 @@ import com.football.taiwo.football.Database.Team.TeamsEntity
 import com.football.taiwo.football.Home.CompetitionTeamInteractor
 import com.football.taiwo.football.Home.CompetitionTeamPresenter
 import com.football.taiwo.football.R
-import kotlinx.android.synthetic.main.fragment_competition_table.view.*
 import kotlinx.android.synthetic.main.fragment_competition_team.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.uiThread

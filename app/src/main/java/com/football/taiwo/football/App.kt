@@ -2,9 +2,6 @@ package com.football.taiwo.football
 
 import android.app.Application
 import android.content.Context
-import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
-import androidx.room.RoomDatabase
 import com.football.taiwo.football.Database.RoomSingleton
 
 class App : Application() {
