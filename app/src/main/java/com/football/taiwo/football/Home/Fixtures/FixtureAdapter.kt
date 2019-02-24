@@ -22,7 +22,7 @@ class FixtureAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Fixtu
         this.listener = listener
     }
 
-    class MyViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    class MyViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
 
         var fixtureStatus :  TextView? = null
         var fixtureTime :  TextView? = null
@@ -34,17 +34,16 @@ class FixtureAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Fixtu
         var fixtureScore2 :  TextView? = null
         var card_view :  androidx.cardview.widget.CardView? = null
 
-         constructor(v: View) : super(v){
-             this.fixtureStatus = v.findViewById(R.id.fixtureStatus)
-             this.fixtureTime = v.findViewById(R.id.fixtureTime)
-             this. fixtureMD = v.findViewById(R.id.fixtureMD)
-             this.fixtureTeam1 = v.findViewById(R.id.team1)
-             this.fixtureTeam2 = v.findViewById(R.id.team2)
-             this.fixtureExtra = v.findViewById(R.id.extra)
-             this.fixtureScore1 = v.findViewById(R.id.score1)
-             this.fixtureScore2 = v.findViewById(R.id.score2)
-             this.card_view = v.findViewById(R.id.card_view)
-
+        init {
+            this.fixtureStatus = v.findViewById(R.id.fixtureStatus)
+            this.fixtureTime = v.findViewById(R.id.fixtureTime)
+            this. fixtureMD = v.findViewById(R.id.fixtureMD)
+            this.fixtureTeam1 = v.findViewById(R.id.team1)
+            this.fixtureTeam2 = v.findViewById(R.id.team2)
+            this.fixtureExtra = v.findViewById(R.id.extra)
+            this.fixtureScore1 = v.findViewById(R.id.score1)
+            this.fixtureScore2 = v.findViewById(R.id.score2)
+            this.card_view = v.findViewById(R.id.card_view)
         }
 
     }

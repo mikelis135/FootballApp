@@ -1,10 +1,11 @@
-package com.football.taiwo.football.Home
+package com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer
 
 import android.util.Log
-import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerView
-import com.football.taiwo.football.Database.Team.TeamPlayersEntity
+import com.football.taiwo.football.Database.TeamPlayer.TeamPlayersEntity
+import com.football.taiwo.football.Competitions.CompetitionInteractor
 
-class TeamPlayerPresenter(var teamPlayerView: TeamPlayerView, val teamPlayerInteractor: TeamPlayerInteractor)  : CompetitionInteractor.handleEvents{
+class TeamPlayerPresenter(var teamPlayerView: TeamPlayerView, val teamPlayerInteractor: TeamPlayerInteractor)  :
+    CompetitionInteractor.HandleEvents {
 
     fun loadTeamPlayer(teamId: Int) {
         teamPlayerInteractor.callTeamPlayer(teamId, ::onTeamPlayerLoaded)
@@ -28,11 +29,8 @@ class TeamPlayerPresenter(var teamPlayerView: TeamPlayerView, val teamPlayerInte
     }
 
     fun onTeamPlayerClicked(position: Int, item: MutableList<TeamPlayersEntity>){
-            Log.d("okh", item.get(position).teamName+" team click")
-//         teamPlayerView?.apply {
-//             //setTeamPlayer(item)
-//           //  openCompetitionsPage(position, item.get(position).competitionTitle)
-//         }
+            Log.d("okh", item[position].teamName+" team click")
+
         }
 
 }

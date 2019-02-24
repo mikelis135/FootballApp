@@ -1,16 +1,17 @@
-package com.football.taiwo.football.Home
+package com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer
 
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import com.football.taiwo.football.App
-import com.football.taiwo.football.Database.Team.TeamPlayersEntity
+import com.football.taiwo.football.Database.TeamPlayer.TeamPlayersEntity
+import com.football.taiwo.football.Home.Apicalls
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
 
 class TeamPlayerInteractor : AppCompatActivity() {
 
-    interface handleEvents{
+    interface HandleEvents{
         fun oncompetitionClick()
         fun onLoadStart()
         fun onLoadFinished()
@@ -33,7 +34,7 @@ class TeamPlayerInteractor : AppCompatActivity() {
         var playerPosition = mutableListOf("")
         var playerShirt = mutableListOf("")
 
-        Log.d("okh", teamId.toString() + " competitionId")
+        Log.d("okh", "$teamId competitionId")
         doAsync {
             homeService.getTeamPlayers("fb72bfd14ba7494da1ccf73acd38afdd", teamId)
                 .subscribeOn(Schedulers.io())
@@ -45,30 +46,37 @@ class TeamPlayerInteractor : AppCompatActivity() {
                         if (results.crestUrl == null){
                             results.crestUrl = ""
                         }
-                        if (results.squad.get(i).shirtNumber == null){
-                            results.squad.get(i).shirtNumber = i
+                        if (results.squad[i].shirtNumber == null){
+                            results.squad[i].shirtNumber = i
                         }
-                        if (results.squad.get(i).position == null){
-                            results.squad.get(i).position = ""
+                        if (results.squad[i].position == null){
+                            results.squad[i].position = ""
                         }
-                        if (results.squad.get(i).id == null){
-                            results.squad.get(i).id = 0
+                        if (results.squad[i].id == null){
+                            results.squad[i].id = 0
                         }
                         if (results.name == null){
                             results.name = ""
                         }
                         names.add(i, results.name.toString())
-                        playerId.add(i, results.squad.get(i).id)
-                        playerName.add(i, results.squad.get(i).name.toString())
-                        playerPosition.add(i, results.squad.get(i).position.toString())
+                        playerId.add(i, results.squad[i].id)
+                        playerName.add(i, results.squad[i].name.toString())
+                        playerPosition.add(i, results.squad[i].position.toString())
                         teamLogo.add(i, results.crestUrl.toString())
-                        playerShirt.add(i, results.squad.get(i).shirtNumber.toString())
+                        playerShirt.add(i, results.squad[i].shirtNumber.toString())
                     }
 
                     doAsync {
                         for (i in 1 until names.size) {
-                            teamPlayersEntity = TeamPlayersEntity(playerId.get(i), names.get(i), playerName.get(i), playerShirt.get(i), playerPosition.get(i),  teamId, teamLogo.get(i))
-                            Log.d("okh", teamPlayersEntity.toString()+" teamPlayers")
+                            teamPlayersEntity = TeamPlayersEntity(
+                                playerId[i],
+                                names[i],
+                                playerName[i],
+                                playerShirt[i],
+                                playerPosition[i],  teamId,
+                                teamLogo[i]
+                            )
+                            Log.d("okh", "$teamPlayersEntity teamPlayers")
                             App.getInstance(this@TeamPlayerInteractor).teamPlayerDao().insert(teamPlayersEntity)
 
                         }

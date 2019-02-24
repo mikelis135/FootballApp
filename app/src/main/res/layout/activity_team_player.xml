@@ -16,7 +16,7 @@
                 android:id="@+id/playerCancel"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/ic_cancel_black_24dp"/>
+                android:src="@drawable/ic_cancel_black_24dp" android:contentDescription="TODO"/>
 
         <TextView
                 android:id="@+id/playerTeamName"
@@ -29,13 +29,13 @@
         android:text="@string/manchester_united_fc"/>
 
             <ImageView
-            android:id="@+id/playerTeamLogo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            app:layout_constraintEnd_toEndOf="@id/constraint"
-            app:layout_constraintStart_toStartOf="@id/constraint"
-            app:layout_constraintTop_toBottomOf="@id/playerTeamName"
-            android:src="@drawable/ic_soccer"/>
+                    android:id="@+id/playerTeamLogo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:layout_constraintEnd_toEndOf="@id/constraint"
+                    app:layout_constraintStart_toStartOf="@id/constraint"
+                    app:layout_constraintTop_toBottomOf="@id/playerTeamName"
+                    android:src="@drawable/ic_soccer" android:contentDescription="TODO"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playerRecylerView"

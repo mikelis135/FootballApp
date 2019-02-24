@@ -16,6 +16,6 @@ public class HomeCompetitionModel {
     public Filters filters;
     @SerializedName("competitions")
     @Expose
-    public List<Competition> competitions = null;
+    public final List<Competition> competitions = null;
 
 }

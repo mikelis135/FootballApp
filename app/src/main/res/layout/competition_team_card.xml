@@ -24,7 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:paddingTop="5dp"
-                    android:src="@drawable/ic_soccer"/>
+                    android:src="@drawable/ic_soccer" android:contentDescription="TODO"/>
             <TextView
                 android:id="@+id/competitionTeamName"
                 android:layout_width="match_parent"

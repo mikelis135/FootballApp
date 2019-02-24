@@ -16,6 +16,6 @@ public class Match35 {
     public Filters filters;
     @SerializedName("matches")
     @Expose
-    public List<Match> matches = null;
+    public final List<Match> matches = null;
 
 }

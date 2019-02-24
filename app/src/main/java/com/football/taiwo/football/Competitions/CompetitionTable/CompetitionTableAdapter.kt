@@ -25,7 +25,7 @@ class CompetitionTableAdapter() : androidx.recyclerview.widget.RecyclerView.Adap
         this.listener = listener
     }
 
-    class MyViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    class MyViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
 
         var teamRank :  TextView? = null
         var teamLogo :  ImageView? = null
@@ -35,15 +35,14 @@ class CompetitionTableAdapter() : androidx.recyclerview.widget.RecyclerView.Adap
         var teamPoint3 :  TextView? = null
         var card_view :  androidx.cardview.widget.CardView? = null
 
-         constructor(v: View) : super(v){
-             this.teamRank = v.findViewById(R.id.teamRank)
-             this.teamLogo = v.findViewById(R.id.teamLogo)
-             this.teamName = v.findViewById(R.id.teamName)
-             this.teamPoint1 = v.findViewById(R.id.teamPoint1)
-             this.teamPoint2 = v.findViewById(R.id.teamPoint2)
-             this.teamPoint3 = v.findViewById(R.id.teamPoint3)
-             this.card_view = v.findViewById(R.id.card_view)
-
+        init {
+            this.teamRank = v.findViewById(R.id.teamRank)
+            this.teamLogo = v.findViewById(R.id.teamLogo)
+            this.teamName = v.findViewById(R.id.teamName)
+            this.teamPoint1 = v.findViewById(R.id.teamPoint1)
+            this.teamPoint2 = v.findViewById(R.id.teamPoint2)
+            this.teamPoint3 = v.findViewById(R.id.teamPoint3)
+            this.card_view = v.findViewById(R.id.card_view)
         }
 
     }
@@ -60,7 +59,7 @@ class CompetitionTableAdapter() : androidx.recyclerview.widget.RecyclerView.Adap
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = competitionTableList!!.get(position)
+        val item = competitionTableList!![position]
         holder.teamRank!!.text = item.tablesPosition
         Glide.with(context)
             .load(item.crestUrl)

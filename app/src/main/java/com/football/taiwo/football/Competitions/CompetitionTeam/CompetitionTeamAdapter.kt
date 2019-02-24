@@ -25,17 +25,16 @@ class CompetitionTeamAdapter() : androidx.recyclerview.widget.RecyclerView.Adapt
         this.listener = listener
     }
 
-    class MyViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    class MyViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
 
         var competitionTeamLogo :  ImageView? = null
         var competitionTeamName :  TextView? = null
         var card_view :  androidx.cardview.widget.CardView? = null
 
-         constructor(v: View) : super(v){
-             this.competitionTeamLogo = v.findViewById(R.id.competitionTeamLogo)
-             this.competitionTeamName = v.findViewById(R.id.competitionTeamName)
-             this.card_view = v.findViewById(R.id.card_view)
-
+        init {
+            this.competitionTeamLogo = v.findViewById(R.id.competitionTeamLogo)
+            this.competitionTeamName = v.findViewById(R.id.competitionTeamName)
+            this.card_view = v.findViewById(R.id.card_view)
         }
 
     }
@@ -52,7 +51,7 @@ class CompetitionTeamAdapter() : androidx.recyclerview.widget.RecyclerView.Adapt
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = competitionTeamList!!.get(position)
+        val item = competitionTeamList!![position]
         Log.d("okh", competitionTeamList.toString() +" adapts")
         Glide.with(context)
             .load(item.crestUrl)

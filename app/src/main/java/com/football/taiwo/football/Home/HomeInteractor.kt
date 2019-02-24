@@ -14,7 +14,7 @@ import org.jetbrains.anko.uiThread
 class HomeInteractor : AppCompatActivity() {
 
 
-    interface handleEvents{
+    interface HandleEvents{
         fun oncompetitionClick()
         fun onLoadStart()
         fun onLoadFinished()
@@ -46,40 +46,36 @@ class HomeInteractor : AppCompatActivity() {
                     .subscribe({ results ->
 
                         var count = results.count
-                        var size = results.matches.size
                         if (count != null) {
                             for (i in 1 until count) {
 
-                                    if (results.matches.get(i).id==null) {
-                                        results.matches.get(i).id = 0
-                                    }
-                                  if (results.matches.size==null) {
-                                      size = 0
+                                    if (results.matches[i].id==null) {
+                                        results.matches[i].id = 0
                                     }
 
-                                 if (results.matches.get(i).status==null) {
-                                     results.matches.get(i).status = ""
+                                if (results.matches[i].status==null) {
+                                     results.matches[i].status = ""
                                     }
-                                 if (results.matches.get(i).homeTeam.name==null) {
-                                     results.matches.get(i).homeTeam.name = ""
+                                 if (results.matches[i].homeTeam.name==null) {
+                                     results.matches[i].homeTeam.name = ""
                                     }
-                                 if (results.matches.get(i).awayTeam.name==null) {
-                                     results.matches.get(i).awayTeam.name = ""
+                                 if (results.matches[i].awayTeam.name==null) {
+                                     results.matches[i].awayTeam.name = ""
                                     }
-                                 if (results.matches.get(i).score.fullTime.homeTeam==null) {
-                                     results.matches.get(i).score.fullTime.homeTeam = ""
+                                 if (results.matches[i].score.fullTime.homeTeam==null) {
+                                     results.matches[i].score.fullTime.homeTeam = ""
                                     }
 
-                                if (results.matches.get(i).score.fullTime.awayTeam==null) {
-                                    results.matches.get(i).score.fullTime.awayTeam = ""
+                                if (results.matches[i].score.fullTime.awayTeam==null) {
+                                    results.matches[i].score.fullTime.awayTeam = ""
                                     }
 
 
                                 fixtureEntity = FixtureEntity(
-                                    results.matches.get(i).id,
+                                    results.matches[i].id,
                                     results.matches.size.toString()+"",
-                                    results.matches.get(i).status+"", results.matches.get(i).homeTeam.name+"",
-                                    results.matches.get(i).awayTeam.name+"", results.matches.get(i).score.fullTime.homeTeam.toString()+"", results.matches.get(i).score.fullTime.awayTeam.toString()+""
+                                    results.matches[i].status+"", results.matches[i].homeTeam.name+"",
+                                    results.matches[i].awayTeam.name+"", results.matches[i].score.fullTime.homeTeam.toString()+"", results.matches[i].score.fullTime.awayTeam.toString()+""
                                 )
                                 doAsync {
                                     App.getInstance(this@HomeInteractor).fixtureDao().insert(fixtureEntity)
@@ -88,7 +84,7 @@ class HomeInteractor : AppCompatActivity() {
                                     }
                                 }
                             }
-                            Log.d("okh", fixtureEntity.toString()+" new")
+                            Log.d("okh", "$fixtureEntity new")
 
                         }
 
@@ -121,22 +117,19 @@ class HomeInteractor : AppCompatActivity() {
                         for (i in 1 until count) {
 
                             competitionEntity = CompetitionEntity(
-                                results.competitions.get(i).id,
+                                results.competitions[i].id,
                                 results.count,
-                                results.competitions.get(i).name
+                                results.competitions[i].name
                             )
-                            // competitionEntity2 = competitionEntity
-                            //return competitionEntity
-                            // Log.d("okh", competitionEntity.toString())
+
                             doAsync {
                                 App.getInstance(this@HomeInteractor).competitionDao().insert(competitionEntity)
                                 uiThread {
-                                    //  Log.d("okh", App.getInstance(this@HomeInteractor).footballDao().allCompetitions().toString())
+
                                 }
                             }
                         }
                         Log.d("okh", competitionEntity.toString())
-
 
                     }
 

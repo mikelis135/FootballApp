@@ -5,11 +5,11 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
-public class RetrofitClient {
+class RetrofitClient {
 
 
     companion object {
-        public fun getClient(baseUrl: String): Retrofit {
+        fun getClient(baseUrl: String): Retrofit {
              var retrofit: Retrofit? = null
             if (retrofit == null) {
 

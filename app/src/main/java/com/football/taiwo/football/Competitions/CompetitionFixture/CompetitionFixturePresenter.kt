@@ -1,10 +1,9 @@
-package com.football.taiwo.football.Home
+package com.football.taiwo.football.Competitions.CompetitionFixture
 
 import android.util.Log
-import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureModel
-import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureView
+import com.football.taiwo.football.Competitions.CompetitionInteractor
 
-class CompetitionFixturePresenter(var competitionView: CompetitionFixtureView, val competitionInteractor: CompetitionFixtureInteractor)  : CompetitionInteractor.handleEvents{
+class CompetitionFixturePresenter(var competitionView: CompetitionFixtureView, val competitionInteractor: CompetitionFixtureInteractor)  : CompetitionInteractor.HandleEvents{
 
     fun loadFixtureCompetitions() {
         competitionInteractor.callFixturecompetitions(::onCompetitionsFixtureLoaded)
@@ -28,10 +27,8 @@ class CompetitionFixturePresenter(var competitionView: CompetitionFixtureView, v
     }
 
     fun onCompetitionFixtureClicked(position: Int, item: MutableList<CompetitionFixtureModel>){
-            Log.d("okh", item.get(position).teamName+" team click")
-//         competitionView?.apply {
-//           //  openCompetitionsPage(position, item.get(position).competitionTitle)
-//         }
+            Log.d("okh", item[position].teamName+" team click")
+
         }
 
 }

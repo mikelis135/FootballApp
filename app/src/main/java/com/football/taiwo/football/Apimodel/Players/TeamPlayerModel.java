@@ -52,7 +52,7 @@ public class TeamPlayerModel {
     public String venue;
     @SerializedName("squad")
     @Expose
-    public List<Squad> squad = null;
+    public final List<Squad> squad = null;
     @SerializedName("lastUpdated")
     @Expose
     public String lastUpdated;

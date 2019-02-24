@@ -1,15 +1,15 @@
-package com.football.taiwo.football.Home
+package com.football.taiwo.football.Competitions
 
 import android.util.Log
 import com.football.taiwo.football.Competitions.CompetitionFixture.CompetitionFixtureModel
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
-import com.football.taiwo.football.Competitions.CompetitionView
 import com.football.taiwo.football.Database.Tables.TablesEntity
 
-class CompetitionPresenter(var competitionView: CompetitionView, val competitionInteractor: CompetitionInteractor)  : CompetitionInteractor.handleEvents{
+class CompetitionPresenter(var competitionView: CompetitionView, val competitionInteractor: CompetitionInteractor)  :
+    CompetitionInteractor.HandleEvents {
 
     fun loadTableCompetitions() {
-      //  competitionInteractor.callTablecompetitions(::onCompetitionsTableLoaded)
+
         Log.d("okh", "loadingCompetitions")
     }
 

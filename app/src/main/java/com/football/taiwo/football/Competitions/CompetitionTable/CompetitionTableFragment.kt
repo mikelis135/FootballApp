@@ -9,8 +9,6 @@ import com.football.taiwo.football.App
 import com.football.taiwo.football.Competitions.Competition.Companion.competitionID
 import com.football.taiwo.football.Database.Competition.CompetitionEntity
 import com.football.taiwo.football.Database.Tables.TablesEntity
-import com.football.taiwo.football.Home.CompetitionTableInteractor
-import com.football.taiwo.football.Home.CompetitionTablePresenter
 import com.football.taiwo.football.R
 import kotlinx.android.synthetic.main.fragment_competition_table.view.*
 import org.jetbrains.anko.doAsync
@@ -19,7 +17,7 @@ import org.jetbrains.anko.uiThread
 class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTableView {
 
     override fun getItemClicked(position: Int, item: MutableList<CompetitionEntity>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private var rootView : View? = null
@@ -31,7 +29,6 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
 
     override fun onResume() {
         callTable()
-       // CompetitionTableFragment.newInstance(competitionID)
         super.onResume()
     }
 
@@ -42,8 +39,8 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
 
                  var tablesEntity : MutableList<TablesEntity> = ArrayList()
                 for (football in 0 until tablesList.size) {
-                    tablesEntity.add(football, tablesList.get(football))
-                    Log.d("okh", tablesList.get(football).name+" from table fragment")
+                    tablesEntity.add(football, tablesList[football])
+                    Log.d("okh", tablesList[football].name+" from table fragment")
 
                     var tableAdapter = CompetitionTableAdapter(activity, tablesEntity, competitionTablePresenter::onCompetitionTableClicked)
                     rootView!!.competitionRecylerView.adapter = tableAdapter
@@ -53,15 +50,15 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
         }
     }
 
-    fun callTable(){
+    private fun callTable(){
         doAsync {
             var tablesList =   App.getInstance(context!!).tablesDao().allTables(competitionID)
             uiThread {
 
                 var tablesEntity : MutableList<TablesEntity> = ArrayList()
                 for (football in 0 until tablesList.size) {
-                    tablesEntity.add(football, tablesList.get(football))
-                    Log.d("okh", tablesList.get(football).name+" from table fragment")
+                    tablesEntity.add(football, tablesList[football])
+                    Log.d("okh", tablesList[football].name+" from table fragment")
 
                     var tableAdapter = CompetitionTableAdapter(activity, tablesEntity, competitionTablePresenter::onCompetitionTableClicked)
                     rootView!!.competitionRecylerView.adapter = tableAdapter
@@ -79,7 +76,7 @@ class CompetitionTableFragment : androidx.fragment.app.Fragment(), CompetitionTa
         rootView = inflater.inflate(R.layout.fragment_competition_table, container, false)
         var mLayoutManager = androidx.recyclerview.widget.GridLayoutManager(activity, 1)
         rootView!!.competitionRecylerView.layoutManager = mLayoutManager
-        Log.d("okh", competitionID.toString() + " fragment")
+        Log.d("okh", "$competitionID fragment")
         competitionTablePresenter.loadTableCompetitions(competitionID)
         rootView!!.section_label.text = getString(
             R.string.section_format, arguments?.getInt(

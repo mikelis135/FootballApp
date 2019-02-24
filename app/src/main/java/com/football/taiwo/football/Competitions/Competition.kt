@@ -11,8 +11,8 @@ import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTabl
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableView
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamFragment
 import com.football.taiwo.football.Database.Competition.CompetitionEntity
-import com.football.taiwo.football.Home.CompetitionTableInteractor
-import com.football.taiwo.football.Home.CompetitionTablePresenter
+import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableInteractor
+import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTablePresenter
 import com.football.taiwo.football.R
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_competition.*
@@ -20,23 +20,22 @@ import kotlinx.android.synthetic.main.activity_competition.*
 class Competition : AppCompatActivity(), CompetitionTableView {
 
     override fun setTable(competitionId: Int) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private val competitionPresenter = CompetitionTablePresenter(this, CompetitionTableInteractor())
 
-
     override fun showShimmer() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     override fun stopShimmer() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
 
     override fun getItemClicked(position: Int, item: MutableList<CompetitionEntity>) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
     }
 
     private var mSectionsPagerAdapter: SectionsPagerAdapter? = null
@@ -55,7 +54,7 @@ class Competition : AppCompatActivity(), CompetitionTableView {
         Log.d("okh", "$competitionID $competitionName")
 
         title = competitionName
-        supportActionBar!!.setTitle(competitionName)
+        supportActionBar!!.title = competitionName
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
         mSectionsPagerAdapter = SectionsPagerAdapter(supportFragmentManager)
 
@@ -97,14 +96,10 @@ class Competition : AppCompatActivity(), CompetitionTableView {
 
         override fun getItem(position: Int): androidx.fragment.app.Fragment {
             var fragment : Fragment? = null
-            if (position==0) {
-                fragment = CompetitionTableFragment.newInstance(competitionID)
-            }
-            else if (position==1) {
-                fragment = CompetitionTableFragment.newInstance(competitionID)
-            }
-            else if (position==2) {
-                fragment = CompetitionTeamFragment.newInstance(competitionID)
+            when (position) {
+                0 -> fragment = CompetitionTableFragment.newInstance(competitionID)
+                1 -> fragment = CompetitionTableFragment.newInstance(competitionID)
+                2 -> fragment = CompetitionTeamFragment.newInstance(competitionID)
             }
             return fragment!!
         }

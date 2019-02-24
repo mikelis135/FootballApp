@@ -4,7 +4,7 @@ package com.football.taiwo.football.Apimodel.Fixtures;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Referee {
+class Referee {
 
     @SerializedName("id")
     @Expose

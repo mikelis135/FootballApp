@@ -6,7 +6,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class HomeFixtureModel {
+class HomeFixtureModel {
 
     @SerializedName("count")
     @Expose

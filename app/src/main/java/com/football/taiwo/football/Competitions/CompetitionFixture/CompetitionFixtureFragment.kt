@@ -5,8 +5,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.football.taiwo.football.Home.CompetitionFixtureInteractor
-import com.football.taiwo.football.Home.CompetitionFixturePresenter
 import com.football.taiwo.football.R
 import kotlinx.android.synthetic.main.fragment_competition_table.view.*
 
@@ -51,7 +49,7 @@ class CompetitionFixtureFragment : androidx.fragment.app.Fragment(), Competition
 
     companion object {
 
-        private val ARG_SECTION_NUMBER = "section_number"
+        private const val ARG_SECTION_NUMBER = "section_number"
 
         fun newInstance(sectionNumber: Int): CompetitionFixtureFragment {
             val fragment = CompetitionFixtureFragment()

@@ -21,15 +21,14 @@ class CompetitionAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<C
         this.listener = listener
     }
 
-    class MyViewHolder : androidx.recyclerview.widget.RecyclerView.ViewHolder {
+    class MyViewHolder(v: View) : androidx.recyclerview.widget.RecyclerView.ViewHolder(v) {
 
         var competitioncompetition :  TextView? = null
         var card_view :  androidx.cardview.widget.CardView? = null
 
-         constructor(v: View) : super(v){
-             this.competitioncompetition = v.findViewById(R.id.competitioncompetition)
-             this.card_view = v.findViewById(R.id.card_view)
-
+        init {
+            this.competitioncompetition = v.findViewById(R.id.competitioncompetition)
+            this.card_view = v.findViewById(R.id.card_view)
         }
 
     }
@@ -47,7 +46,7 @@ class CompetitionAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<C
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = competitionList!!
-        holder.competitioncompetition!!.text = item.get(position).competitionName
+        holder.competitioncompetition!!.text = item[position].competitionName
         holder.card_view!!.setOnClickListener { listener(position, competitionList!!) }
     }
 

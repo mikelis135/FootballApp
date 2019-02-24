@@ -1,10 +1,10 @@
-package com.football.taiwo.football.Home
+package com.football.taiwo.football.Competitions.CompetitionTable
 
 import android.util.Log
-import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableView
+import com.football.taiwo.football.Competitions.CompetitionInteractor
 import com.football.taiwo.football.Database.Tables.TablesEntity
 
-class CompetitionTablePresenter(var competitionView: CompetitionTableView, val competitionInteractor: CompetitionTableInteractor)  : CompetitionInteractor.handleEvents{
+class CompetitionTablePresenter(var competitionView: CompetitionTableView, val competitionInteractor: CompetitionTableInteractor)  : CompetitionInteractor.HandleEvents{
 
     fun loadTableCompetitions(competitionId: Int) {
         competitionInteractor.callTablecompetitions(competitionId,::onCompetitionsTableLoaded)
@@ -26,15 +26,13 @@ class CompetitionTablePresenter(var competitionView: CompetitionTableView, val c
      private fun onCompetitionsTableLoaded(competitionId : Int) {
         competitionView.apply {
             setTable(competitionId)
-            Log.d("okh", competitionId.toString() + " presenter")
+            Log.d("okh", "$competitionId presenter")
         }
     }
 
      fun onCompetitionTableClicked(position: Int, item: MutableList<TablesEntity>){
-            Log.d("okh", item.get(position).name+" team click")
-//         competitionView?.apply {
-//           //  openCompetitionsPage(position, item.get(position).competitionTitle)
-//         }
+            Log.d("okh", item[position].name+" team click")
+
         }
 
 }

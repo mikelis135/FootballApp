@@ -1,8 +1,5 @@
 <resources>
     <string name="app_name">Football</string>
-    <string name="title_fixture">Today\'s Fixtures</string>
-    <string name="title_competitions">Competitions</string>
-    <string name="title_notifications">Notifications</string>
     <string name="finished">FINISHED</string>
     <string name="_19_00">19:00</string>
     <string name="md_35">MD: 35</string>

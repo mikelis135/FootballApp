@@ -19,6 +19,6 @@ public class Standing {
     public Object group;
     @SerializedName("table")
     @Expose
-    public List<Table> table = null;
+    public final List<Table> table = null;
 
 }

@@ -8,7 +8,7 @@ import androidx.room.Query
 @Dao
 interface TablesDao{
     @Query("SELECT * FROM tablesTable WHERE competition LIKE :competitionid order by id")
-    abstract fun allTables(competitionid : Int):List<TablesEntity>
+    fun allTables(competitionid : Int):List<TablesEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(tablesEntity: TablesEntity)

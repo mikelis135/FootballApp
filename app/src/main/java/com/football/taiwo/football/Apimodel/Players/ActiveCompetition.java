@@ -4,7 +4,7 @@ package com.football.taiwo.football.Apimodel.Players;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ActiveCompetition {
+class ActiveCompetition {
 
     @SerializedName("id")
     @Expose

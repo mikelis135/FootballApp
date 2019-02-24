@@ -10,8 +10,8 @@ import com.football.taiwo.football.Database.Fixture.FixtureDao
 import com.football.taiwo.football.Database.Fixture.FixtureEntity
 import com.football.taiwo.football.Database.Tables.TablesDao
 import com.football.taiwo.football.Database.Tables.TablesEntity
-import com.football.taiwo.football.Database.Team.TeamPlayersDao
-import com.football.taiwo.football.Database.Team.TeamPlayersEntity
+import com.football.taiwo.football.Database.TeamPlayer.TeamPlayersDao
+import com.football.taiwo.football.Database.TeamPlayer.TeamPlayersEntity
 import com.football.taiwo.football.Database.Team.TeamsDao
 import com.football.taiwo.football.Database.Team.TeamsEntity
 

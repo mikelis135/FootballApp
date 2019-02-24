@@ -16,6 +16,6 @@ public class TeamModel {
     public Filters filters;
     @SerializedName("teams")
     @Expose
-    public List<Team> teams = null;
+    public final List<Team> teams = null;
 
 }

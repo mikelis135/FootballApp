@@ -19,6 +19,6 @@ public class TableModel {
     public Season season;
     @SerializedName("standings")
     @Expose
-    public List<Standing> standings = null;
+    public final List<Standing> standings = null;
 
 }

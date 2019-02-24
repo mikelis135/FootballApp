@@ -31,27 +31,26 @@ class HomePresenter( var homeView : HomeView, val homeInteractor: HomeInteractor
 
     fun onFixtureItemClicked(position: Int, item: MutableList<FixtureEntity>){
         homeView.apply {
-            Log.d("okh", item.get(position).fixtureAwayTeam+ position)
+            Log.d("okh", item[position].fixtureAwayTeam+ position)
 
         }
     }
 
      fun onCompetitionItemClicked(position: Int, item: MutableList<CompetitionEntity>){
-         //homeInteractor.createCompetitionTeamModel(item.get(position).competitionID)
-         Log.d("okh", item.get(position).competitionID.toString()+" clickcomp")
+
+         Log.d("okh", item[position].competitionID.toString()+" clickcomp")
          homeView.apply {
-//             homeInteractor.createCompetitionTableModel(item.get(position).competitionID)
-             openCompetitionsPage(item.get(position).competitionID, item.get(position).competitionName)
+
+             openCompetitionsPage(item[position].competitionID, item[position].competitionName)
 
          }
         }
 
     fun onTableLoaded(position: Int, item: MutableList<TablesEntity>){
-      //  homeInteractor.createCompetitionTableModel(item.get(position).tablesID)
-        //homeInteractor.createCompetitionTeamModel(item.get(position).competitionID)
-        Log.d("okh", item.get(position).name.toString()+" clickcomp")
+
+        Log.d("okh", item[position].name +" clickcomp")
         homeView.apply {
-            openCompetitionsPage(item.get(position).tablesID, item.get(position).name)
+            openCompetitionsPage(item[position].tablesID, item[position].name)
 
         }
     }

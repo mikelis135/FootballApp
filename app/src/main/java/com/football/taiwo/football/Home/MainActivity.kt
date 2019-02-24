@@ -23,12 +23,10 @@ class MainActivity : AppCompatActivity(), HomeView{
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { item ->
         when (item.itemId) {
             R.id.navigation_fixtures -> {
-              //  message.setText(R.string.title_fixture)
                 homePresenter.loadFixtures()
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_competitions -> {
-               // message.setText(R.string.title_competitions)
                 homePresenter.loadCompetitions()
                 return@OnNavigationItemSelectedListener true
             }
@@ -44,19 +42,19 @@ class MainActivity : AppCompatActivity(), HomeView{
     }
 
     override fun onResume() {
-        homePresenter.loadFixtures()
+        callFixtureDB()
+        callCompetitionDB()
         super.onResume()
     }
 
-    fun callFixtureDB(){
+    private fun callFixtureDB(){
         var listfootball : MutableList<FixtureEntity> = ArrayList()
         doAsync {
             val list = App.getInstance(applicationContext).fixtureDao().allFixtures()
             uiThread {
                 for (football in 0 until list.size) {
-                    listfootball.add(football, list.get(football))
+                    listfootball.add(football, list[football])
                     Log.d("okh", listfootball.toString())
-                    // toast(list.get(football).fixtureAwayTeam)
                     var fixtureAdapter = FixtureAdapter(this@MainActivity, listfootball, homePresenter::onFixtureItemClicked)
                     homeRecylerView.adapter = fixtureAdapter
                 }
@@ -73,13 +71,13 @@ class MainActivity : AppCompatActivity(), HomeView{
         callCompetitionDB()
     }
 
-    fun callCompetitionDB(){
+    private fun callCompetitionDB(){
         var listfootball : MutableList<CompetitionEntity> = ArrayList()
         doAsync {
             val list = App.getInstance(applicationContext).competitionDao().allCompetitions()
             uiThread {
                 for (football in 0 until list.size) {
-                    listfootball.add(football, list.get(football))
+                    listfootball.add(football, list[football])
                 }
                 var homeAdapter = CompetitionAdapter(this@MainActivity, listfootball, homePresenter::onCompetitionItemClicked)
                 homeRecylerView.adapter = homeAdapter
