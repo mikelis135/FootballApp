@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.football.taiwo.football.App
 import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamModel
 import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
+import com.football.taiwo.football.Database.Team.TeamPlayersEntity
 import com.football.taiwo.football.Database.Team.TeamsEntity
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
@@ -27,15 +28,12 @@ class TeamPlayerInteractor : AppCompatActivity() {
     }
 
     private fun createTeamPlayerModel(teamId: Int): Int  {
-        var teamsEntityLists : MutableList<CompetitionTeamModel> = java.util.ArrayList()
-        var teamsEntityList : MutableList<TeamsEntity> = java.util.ArrayList()
-        var teamsModelList : MutableList<CompetitionTeamModel> = java.util.ArrayList()
-        var teamsEntity: TeamsEntity
+        var teamPlayersEntity: TeamPlayersEntity
         var names = mutableListOf("")
-        var teamLogo = mutableListOf("")
+        var teamLogo = ""
         var playerId = mutableListOf("")
         var playerName = mutableListOf("")
-        var playerRole = mutableListOf("")
+        var playerPosition = mutableListOf("")
         var playerShirt = mutableListOf("")
 
         Log.d("okh", teamId.toString() + " competitionId")
@@ -50,23 +48,20 @@ class TeamPlayerInteractor : AppCompatActivity() {
                         names.add(i, results.name.toString())
                         playerId.add(i, results.squad.get(i).id.toString())
                         playerName.add(i, results.squad.get(i).name.toString())
-                        playerRole.add(i, results.squad.get(i).position.toString())
+                        playerPosition.add(i, results.squad.get(i).position.toString())
                         playerShirt.add(i, results.squad.get(i).shirtNumber.toString())
-                        playerShirt.add(i, results.crestUrl.toString())
                         if (results.crestUrl == null){
                             results.crestUrl = ""
                         }
-                        teamLogo.add(i, results.crestUrl.toString()+"")
-//                        Log.d("okh", names.toString()+" names")
-//                        Log.d("okh", teamLogo.toString()+" logos")
+                        teamLogo =  results.crestUrl.toString()
 
                     }
 
                     doAsync {
                         for (i in 1 until names.size) {
-//                            teamsEntity = TeamsEntity(teamId.get(i).toInt(), names.get(i), competitionId, teamLogo.get(i))
-//                            Log.d("okh", teamsEntity.toString()+" teams")
-//                            App.getInstance(this@TeamPlayerInteractor).teamsDao().insert(teamsEntity)
+                            teamPlayersEntity = TeamPlayersEntity(teamId, names.get(i), playerName.get(i), playerShirt.get(i), playerPosition.get(i),  teamId, teamLogo)
+                            Log.d("okh", teamPlayersEntity.toString()+" teamPlayers")
+                            App.getInstance(this@TeamPlayerInteractor).teamPlayerDao().insert(teamPlayersEntity)
 
                         }
                     }

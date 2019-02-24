@@ -9,16 +9,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
+import com.football.taiwo.football.Database.Team.TeamPlayersEntity
 import com.football.taiwo.football.R
 
 class TeamPlayerAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<TeamPlayerAdapter.MyViewHolder>() {
 
     var context : Context? = null
-    var teamPlayerList : MutableList<TeamPlayerModel>? = null
-    lateinit var listener : (Int, MutableList<TeamPlayerModel>) -> Unit
+    var teamPlayerList : MutableList<TeamPlayersEntity>? = null
+    lateinit var listener : (Int, MutableList<TeamPlayersEntity>) -> Unit
 
 
-    constructor(context: Context?, teamPlayerList: MutableList<TeamPlayerModel>?, listener : (Int, MutableList<TeamPlayerModel>) -> Unit) : this() {
+    constructor(context: Context?, teamPlayerList: MutableList<TeamPlayersEntity>?, listener : (Int, MutableList<TeamPlayersEntity>) -> Unit) : this() {
         this.context = context
         this.teamPlayerList = teamPlayerList
         this.listener = listener
@@ -52,9 +53,9 @@ class TeamPlayerAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Te
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val item = teamPlayerList!![position]
-        holder.teamPlayerShirt!!.text = item.playerShirt.get(position)
-        holder.teamPlayerName!!.text = item.playerNames.get(position)
-        holder.teamPlayerRole!!.text = item.playerRoles.get(position)
+        holder.teamPlayerShirt!!.text = item.playerShirt
+        holder.teamPlayerName!!.text = item.playerName
+        holder.teamPlayerRole!!.text = item.playerPosition
 //        holder.card_view!!.setOnClickListener { listener(position, teamPlayerList!!) }
     }
 

@@ -7,11 +7,12 @@ import com.football.taiwo.football.Competitions.CompetitionTeam.CompetitionTeamM
 import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerModel
 import com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer.TeamPlayerView
 import com.football.taiwo.football.Competitions.CompetitionView
+import com.football.taiwo.football.Database.Team.TeamPlayersEntity
 
 class TeamPlayerPresenter(var teamPlayerView: TeamPlayerView, val teamPlayerInteractor: TeamPlayerInteractor)  : CompetitionInteractor.handleEvents{
 
-    fun loadTeamPlayer() {
-        teamPlayerInteractor.callTeamPlayer(::onTeamPlayerLoaded)
+    fun loadTeamPlayer(teamId: Int) {
+        teamPlayerInteractor.callTeamPlayer(teamId, ::onTeamPlayerLoaded)
         Log.d("okh", "loadingCompetitions")
     }
 
@@ -25,13 +26,13 @@ class TeamPlayerPresenter(var teamPlayerView: TeamPlayerView, val teamPlayerInte
      }
 
 
-   private fun onTeamPlayerLoaded(items: MutableList<TeamPlayerModel>) {
+   private fun onTeamPlayerLoaded(teamId : Int) {
        teamPlayerView.apply {
-            setTeamPlayer(items)
+            setTeamPlayer(teamId)
         }
     }
 
-    fun onTeamPlayerClicked(position: Int, item: MutableList<TeamPlayerModel>){
+    fun onTeamPlayerClicked(position: Int, item: MutableList<TeamPlayersEntity>){
             Log.d("okh", item.get(position).teamName+" team click")
 //         teamPlayerView?.apply {
 //             //setTeamPlayer(item)
