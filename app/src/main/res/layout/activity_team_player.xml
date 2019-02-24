@@ -6,13 +6,16 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:minHeight="400dp"
+        android:minWidth="500dp"
+        android:maxHeight="500dp"
         tools:context=".Competitions.CompetitionTeam.TeamPlayer.TeamPlayer">
 
 
         <ImageView
                 android:id="@+id/playerCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:src="@drawable/ic_cancel_black_24dp"/>
 
         <TextView
@@ -20,6 +23,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
+                android:padding="10dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
         android:text="@string/manchester_united_fc"/>
 
@@ -30,15 +35,14 @@
             app:layout_constraintEnd_toEndOf="@id/constraint"
             app:layout_constraintStart_toStartOf="@id/constraint"
             app:layout_constraintTop_toBottomOf="@id/playerTeamName"
-            android:layout_marginTop="10dp"
-            android:src="@mipmap/ic_launcher_round"/>
+            android:src="@drawable/ic_soccer"/>
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/playerRecylerView"
             android:layout_height="wrap_content"
             android:layout_width = "match_parent"
             app:layout_constraintTop_toBottomOf="@id/playerTeamLogo"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="10dp"
             android:scrollbars="none" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

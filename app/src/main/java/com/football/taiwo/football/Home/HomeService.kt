@@ -24,7 +24,7 @@ interface HomeService {
     @GET("/v2/competitions/{id}/teams")
      fun getTeams(@Header("X-Auth-Token") apiKey : String, @Path("id") id : Int): Observable<TeamModel>
 
-    @GET("/v2/competitions/teams/{id}")
+    @GET("/v2/teams/{id}")
     fun getTeamPlayers(@Header("X-Auth-Token") apiKey : String, @Path("id") id : Int): Observable<TeamPlayerModel>
 
 

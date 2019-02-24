@@ -30,8 +30,8 @@ class TeamPlayerInteractor : AppCompatActivity() {
     private fun createTeamPlayerModel(teamId: Int): Int  {
         var teamPlayersEntity: TeamPlayersEntity
         var names = mutableListOf("")
-        var teamLogo = ""
-        var playerId = mutableListOf("")
+        var teamLogo = mutableListOf("")
+        var playerId = mutableListOf(0)
         var playerName = mutableListOf("")
         var playerPosition = mutableListOf("")
         var playerShirt = mutableListOf("")
@@ -45,21 +45,32 @@ class TeamPlayerInteractor : AppCompatActivity() {
 
                     val size = results.squad.size
                     for (i in 1 until size) {
-                        names.add(i, results.name.toString())
-                        playerId.add(i, results.squad.get(i).id.toString())
-                        playerName.add(i, results.squad.get(i).name.toString())
-                        playerPosition.add(i, results.squad.get(i).position.toString())
-                        playerShirt.add(i, results.squad.get(i).shirtNumber.toString())
                         if (results.crestUrl == null){
                             results.crestUrl = ""
                         }
-                        teamLogo =  results.crestUrl.toString()
-
+                        if (results.squad.get(i).shirtNumber == null){
+                            results.squad.get(i).shirtNumber = i
+                        }
+                        if (results.squad.get(i).position == null){
+                            results.squad.get(i).position = ""
+                        }
+                        if (results.squad.get(i).id == null){
+                            results.squad.get(i).id = 0
+                        }
+                        if (results.name == null){
+                            results.name = ""
+                        }
+                        names.add(i, results.name.toString())
+                        playerId.add(i, results.squad.get(i).id)
+                        playerName.add(i, results.squad.get(i).name.toString())
+                        playerPosition.add(i, results.squad.get(i).position.toString())
+                        teamLogo.add(i, results.crestUrl.toString())
+                        playerShirt.add(i, results.squad.get(i).shirtNumber.toString())
                     }
 
                     doAsync {
                         for (i in 1 until names.size) {
-                            teamPlayersEntity = TeamPlayersEntity(teamId, names.get(i), playerName.get(i), playerShirt.get(i), playerPosition.get(i),  teamId, teamLogo)
+                            teamPlayersEntity = TeamPlayersEntity(playerId.get(i), names.get(i), playerName.get(i), playerShirt.get(i), playerPosition.get(i),  teamId, teamLogo.get(i))
                             Log.d("okh", teamPlayersEntity.toString()+" teamPlayers")
                             App.getInstance(this@TeamPlayerInteractor).teamPlayerDao().insert(teamPlayersEntity)
 

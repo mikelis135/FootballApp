@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         card_view:cardCornerRadius="4dp"
-        card_view:cardElevation="10dp">
+        card_view:cardElevation="5dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintCard"
@@ -24,7 +24,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="80dp"
                     android:paddingTop="5dp"
-                    android:src="@mipmap/ic_launcher"/>
+                    android:src="@drawable/ic_soccer"/>
             <TextView
                 android:id="@+id/competitionTeamName"
                 android:layout_width="match_parent"
@@ -33,9 +33,7 @@
                 card_view:layout_constraintEnd_toEndOf="@id/constraintCard"
                 android:layout_marginTop="10dp"
                 card_view:layout_constraintTop_toBottomOf="@id/competitionTeamLogo"
-                android:textSize="14sp"
-
-                android:textStyle="bold"
+                android:textSize="12sp"
                 android:gravity="center_horizontal"
                 android:text="@string/burnley_fc" />
 

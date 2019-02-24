@@ -29,7 +29,9 @@
                 android:theme="@style/AppTheme.NoActionBar"/>
         <activity
                 android:name=".Competitions.CompetitionTeam.TeamPlayer.TeamPlayer"
-                android:parentActivityName="Competitions.Competition"/>
+                android:parentActivityName="Competitions.Competition"
+                android:excludeFromRecents="true"
+        android:theme="@style/teamDiaog"/>
     </application>
 
 </manifest>

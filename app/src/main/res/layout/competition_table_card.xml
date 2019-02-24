@@ -34,7 +34,8 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:paddingLeft="30dp"
-                     android:src="@drawable/ic_notifications_black_24dp"/>
+                    android:tint="@color/colorPrimary"
+                    android:src="@drawable/ic_soccer"/>
 
             <TextView
                 android:id="@+id/teamName"

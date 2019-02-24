@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 2,
-    "identityHash": "8bca9726817827fc434129a38ebacd59",
+    "identityHash": "7b52d27eeb9bea2ab535eddcc144e0cc",
     "entities": [
       {
         "tableName": "footballTable",
@@ -197,11 +197,67 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "teamPlayersTable",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `teamname` TEXT NOT NULL, `playername` TEXT NOT NULL, `shirt` TEXT NOT NULL, `position` TEXT NOT NULL, `team` INTEGER NOT NULL, `crestUrl` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "tablesID",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "teamName",
+            "columnName": "teamname",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerName",
+            "columnName": "playername",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerShirt",
+            "columnName": "shirt",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "playerPosition",
+            "columnName": "position",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "team",
+            "columnName": "team",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "crestUrl",
+            "columnName": "crestUrl",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"8bca9726817827fc434129a38ebacd59\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7b52d27eeb9bea2ab535eddcc144e0cc\")"
     ]
   }
 }

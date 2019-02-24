@@ -2,6 +2,7 @@ package com.football.taiwo.football.Competitions.CompetitionTeam.TeamPlayer
 
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.GridLayoutManager
 import com.football.taiwo.football.App
@@ -14,6 +15,8 @@ import com.football.taiwo.football.Database.Team.TeamsEntity
 import com.football.taiwo.football.Home.TeamPlayerInteractor
 import com.football.taiwo.football.Home.TeamPlayerPresenter
 import com.football.taiwo.football.R
+import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.activity_team_player.*
 import kotlinx.android.synthetic.main.fragment_competition_team.view.*
 import org.jetbrains.anko.doAsync
@@ -23,6 +26,8 @@ class TeamPlayer : AppCompatActivity(), TeamPlayerView {
 
     private val teamPlayerPresenter = TeamPlayerPresenter(this, TeamPlayerInteractor())
 
+    var team : TeamsEntity? = null
+
     override fun showShimmer() {
 
     }
@@ -31,15 +36,41 @@ class TeamPlayer : AppCompatActivity(), TeamPlayerView {
 
     }
 
+    override fun onResume() {
+        callTeamPlayer()
+        super.onResume()
+    }
+
     override fun setTeamPlayer(teamId: Int) {
 
         doAsync {
-            var teamPlayersList =   App.getInstance(this@TeamPlayer!!).teamPlayerDao().allTeams(teamId)
+            var teamPlayersList =   App.getInstance(this@TeamPlayer!!).teamPlayerDao().allTeams(team!!.tablesID)
             Log.d("okh", teamPlayersList.toString()+" from teamplayerfragment")
 
             uiThread {
-                playerTeamName.text = teamPlayersList.get(0).teamName
-                Log.d("Okh", teamPlayersList.get(0).teamName+"")
+               // playerTeamName.text = teamPlayersList.get(0).teamName
+               // Log.d("Okh", teamPlayersList.get(0).teamName+"")
+                var teamsPlayersEntity : MutableList<TeamPlayersEntity> = ArrayList()
+                for (football in 0 until teamPlayersList.size) {
+                    teamsPlayersEntity.add(football, teamPlayersList.get(football))
+                    Log.d("okh", teamPlayersList.get(football).teamName+" from team fragment")
+
+                    var homeAdapter = TeamPlayerAdapter(this@TeamPlayer, teamsPlayersEntity, teamPlayerPresenter::onTeamPlayerClicked)
+                    playerRecylerView.adapter = homeAdapter
+                }
+
+            }
+        }
+    }
+
+    fun callTeamPlayer(){
+        doAsync {
+            var teamPlayersList =   App.getInstance(this@TeamPlayer!!).teamPlayerDao().allTeams(team!!.tablesID)
+            Log.d("okh", teamPlayersList.toString()+" from teamplayerfragment")
+
+            uiThread {
+                // playerTeamName.text = teamPlayersList.get(0).teamName
+                // Log.d("Okh", teamPlayersList.get(0).teamName+"")
                 var teamsPlayersEntity : MutableList<TeamPlayersEntity> = ArrayList()
                 for (football in 0 until teamPlayersList.size) {
                     teamsPlayersEntity.add(football, teamPlayersList.get(football))
@@ -61,8 +92,12 @@ class TeamPlayer : AppCompatActivity(), TeamPlayerView {
         playerRecylerView.layoutManager = mLayoutManager
         val playerIntent = intent
         val position = playerIntent.extras!!.getInt(getString(R.string.position), 0)
-
-        teamPlayerPresenter.loadTeamPlayer(position)
+        team = playerIntent.extras!!.getSerializable(getString(R.string.competition)) as TeamsEntity
+        playerTeamName.text = team!!.teamName
+        teamPlayerPresenter.loadTeamPlayer(team!!.tablesID)
+        playerCancel.setOnClickListener {
+            finish()
+        }
 
     }
 }

@@ -1,6 +1,7 @@
 package com.football.taiwo.football.Competitions.teamPlayer.TeamPlayer
 
 import android.content.Context
+import android.util.Log
 import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import android.view.LayoutInflater
@@ -56,6 +57,7 @@ class TeamPlayerAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Te
         holder.teamPlayerShirt!!.text = item.playerShirt
         holder.teamPlayerName!!.text = item.playerName
         holder.teamPlayerRole!!.text = item.playerPosition
+        Log.d("okh", item.playerName+" playeradapter")
 //        holder.card_view!!.setOnClickListener { listener(position, teamPlayerList!!) }
     }
 

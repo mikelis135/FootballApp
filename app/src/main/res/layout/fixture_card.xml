@@ -5,17 +5,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         card_view:cardCornerRadius="1dp"
-        card_view:cardElevation="2dp">
+        android:layout_marginBottom="1dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintCard"
             android:layout_width="match_parent"
-            android:padding="10dp"
+            android:layout_margin="10dp"
             android:layout_height="wrap_content">
 
         <TextView
                 android:id="@+id/fixtureStatus"
-                android:layout_width="wrap_content"
+                android:layout_width="60dp"
                 android:layout_height="wrap_content"
                 android:paddingLeft="5dp"
                 android:paddingTop="5dp"
@@ -47,7 +47,7 @@
                 android:id="@+id/team1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
+                android:paddingLeft="15dp"
                 android:paddingTop="5dp"
                 android:textSize="16sp"
                 card_view:layout_constraintLeft_toRightOf="@id/fixtureStatus"
@@ -57,7 +57,7 @@
                 android:id="@+id/team2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
+                android:paddingLeft="15dp"
                 android:textSize="16sp"
                 android:paddingBottom="5dp"
                 card_view:layout_constraintBottom_toBottomOf="@id/fixtureMD"
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="20dp"
                 android:textSize="12sp"
-                android:layout_marginTop="10dp"
+                android:layout_marginTop="5dp"
                 card_view:layout_constraintBottom_toBottomOf="@id/fixtureTime"
                 card_view:layout_constraintTop_toTopOf="@id/fixtureTime"
                 card_view:layout_constraintEnd_toEndOf="@id/constraintCard"
@@ -100,7 +100,6 @@
                 card_view:layout_constraintEnd_toEndOf="@id/constraintCard"
                 card_view:layout_constraintTop_toBottomOf="@id/extra"
                 android:text="@string/_0" />
-
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

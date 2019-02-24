@@ -11,10 +11,11 @@ import com.football.taiwo.football.Database.Fixture.FixtureEntity
 import com.football.taiwo.football.Database.Tables.TablesDao
 import com.football.taiwo.football.Database.Tables.TablesEntity
 import com.football.taiwo.football.Database.Team.TeamPlayersDao
+import com.football.taiwo.football.Database.Team.TeamPlayersEntity
 import com.football.taiwo.football.Database.Team.TeamsDao
 import com.football.taiwo.football.Database.Team.TeamsEntity
 
-@Database(entities = [CompetitionEntity::class, FixtureEntity::class, TablesEntity::class, TeamsEntity::class, TeamPlayersDao::class], version = 2)
+@Database(entities = [CompetitionEntity::class, FixtureEntity::class, TablesEntity::class, TeamsEntity::class, TeamPlayersEntity::class], version = 2)
 
 abstract class RoomSingleton : RoomDatabase() {
     abstract fun competitionDao(): CompetitionDao
