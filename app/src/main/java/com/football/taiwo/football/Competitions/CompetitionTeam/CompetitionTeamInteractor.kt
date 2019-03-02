@@ -8,6 +8,7 @@ import com.football.taiwo.football.Home.Apicalls
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import java.util.*
 
 class CompetitionTeamInteractor : AppCompatActivity(){
@@ -33,40 +34,45 @@ class CompetitionTeamInteractor : AppCompatActivity(){
         var teamLogo = mutableListOf("")
         var teamId = mutableListOf("")
         Log.d("okh", "$competitionId competitionId")
-        doAsync {
-            homeService.getTeams("fb72bfd14ba7494da1ccf73acd38afdd", competitionId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
+        try {
+            doAsync {
+                homeService.getTeams("fb72bfd14ba7494da1ccf73acd38afdd", competitionId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ results ->
 
-                    val size = results.teams.size
-                    for (i in 1 until size-1) {
-                        names.add(i, results.teams[i].name.toString())
-                        teamId.add(i, results.teams[i].id.toString())
-                        if (results.teams[i].crestUrl == null){
-                            results.teams[i].crestUrl = ""
-                        }
-                        teamLogo.add(i, results.teams[i].crestUrl.toString()+"")
-
-                    }
-
-                    doAsync {
-                        for (i in 1 until names.size) {
-                            teamsEntity = TeamsEntity(teamId[i].toInt(), names[i], competitionId, teamLogo[i])
-                            Log.d("okh", "$teamsEntity teams")
-                            App.getInstance(this@CompetitionTeamInteractor).teamsDao().insert(teamsEntity)
+                        val size = results.teams.size
+                        for (i in 1 until size-1) {
+                            names.add(i, results.teams[i].name.toString())
+                            teamId.add(i, results.teams[i].id.toString())
+                            if (results.teams[i].crestUrl == null){
+                                results.teams[i].crestUrl = ""
+                            }
+                            teamLogo.add(i, results.teams[i].crestUrl.toString()+"")
 
                         }
-                    }
+
+                        doAsync {
+                            for (i in 1 until names.size) {
+                                teamsEntity = TeamsEntity(teamId[i].toInt(), names[i], competitionId, teamLogo[i])
+                                Log.d("okh", "$teamsEntity teams")
+                                App.getInstance(this@CompetitionTeamInteractor).teamsDao().insert(teamsEntity)
+
+                            }
+                        }
 
 
-                },
-                    {
-                        Log.d("okherror", "" + it.localizedMessage.toString())
-                    }
-                )
+                    },
+                        {
+                            Log.d("okherror", "" + it.localizedMessage.toString())
+                        }
+                    )
+
+            }
+        }catch (e : Exception){
 
         }
+
 
         return 2
     }

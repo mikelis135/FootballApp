@@ -7,12 +7,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class RetrofitClient {
 
+    // static method getClient
 
     companion object {
         fun getClient(baseUrl: String): Retrofit {
              var retrofit: Retrofit? = null
             if (retrofit == null) {
 
+                // interceptor to log the data from the retrofit client
                 val interceptor = HttpLoggingInterceptor()
                 interceptor.level = HttpLoggingInterceptor.Level.BODY
 

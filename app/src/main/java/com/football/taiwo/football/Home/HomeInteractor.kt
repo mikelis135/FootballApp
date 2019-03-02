@@ -9,13 +9,13 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 import org.jetbrains.anko.uiThread
 
 class HomeInteractor : AppCompatActivity() {
 
 
     interface HandleEvents{
-        fun oncompetitionClick()
         fun onLoadStart()
         fun onLoadFinished()
     }
@@ -34,69 +34,92 @@ class HomeInteractor : AppCompatActivity() {
     }
     private var disposable: Disposable? = null
 
-    private var fixtureEntity = FixtureEntity(0, "", "", "","","", "")
+    private var fixtureEntity = FixtureEntity(0, "", "", "", "","","", "")
 
     private fun createFixtureList(): FixtureEntity {
 
-            doAsync {
+            try {
+                doAsync {
 
-                disposable = homeService.getFixtures("fb72bfd14ba7494da1ccf73acd38afdd")
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe({ results ->
+                    disposable = homeService.getFixtures("fb72bfd14ba7494da1ccf73acd38afdd")
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe({ results ->
 
-                        var count = results.count
-                        if (count != null) {
-                            for (i in 1 until count) {
+                            var count = results.count
+                            var time : String = ""
+                            var score1 : String = ""
+                            var score2 : String  = ""
+
+                            if (count != null) {
+                                for (i in 1 until count) {
 
                                     if (results.matches[i].id==null) {
                                         results.matches[i].id = 0
                                     }
-
-                                if (results.matches[i].status==null) {
-                                     results.matches[i].status = ""
+                                    if (results.matches[i].status==null) {
+                                        results.matches[i].status = ""
                                     }
-                                 if (results.matches[i].homeTeam.name==null) {
-                                     results.matches[i].homeTeam.name = ""
+                                    if (results.matches[i].homeTeam.name==null) {
+                                        results.matches[i].homeTeam.name = ""
                                     }
-                                 if (results.matches[i].awayTeam.name==null) {
-                                     results.matches[i].awayTeam.name = ""
+                                    if (results.matches[i].awayTeam.name==null) {
+                                        results.matches[i].awayTeam.name = ""
                                     }
-                                 if (results.matches[i].score.fullTime.homeTeam==null) {
-                                     results.matches[i].score.fullTime.homeTeam = ""
+                                    if (results.matches[i].score.fullTime.homeTeam==null) {
+                                        results.matches[i].score.fullTime.homeTeam = ""
+                                    }
+                                    else{
+                                        score1 = results.matches[i].score.fullTime.homeTeam.toString().substring(0,1)
+                                    }
+                                    if (results.matches[i].score.fullTime.awayTeam==null) {
+                                        results.matches[i].score.fullTime.awayTeam = ""
+                                    }
+                                    else{
+                                        score2 = results.matches[i].score.fullTime.awayTeam.toString().substring(0,1)
+                                    }
+                                    if (results.matches[i].lastUpdated==null) {
+                                        results.matches[i].lastUpdated = ""
+                                    }
+                                    else{
+                                        val timearray = results.matches[i].lastUpdated.split("T")
+                                        time =   timearray[1].substring(0,5)
                                     }
 
-                                if (results.matches[i].score.fullTime.awayTeam==null) {
-                                    results.matches[i].score.fullTime.awayTeam = ""
-                                    }
+                                    Log.d("okh", "$time time of the match")
+                                    Log.d("okh", "$score1 score1 of the match")
+                                    Log.d("okh", "$score2 score2 of the match")
 
+                                    fixtureEntity = FixtureEntity(
+                                        results.matches[i].id,
+                                        results.matches.size.toString()+"",time,
+                                        results.matches[i].status+"", results.matches[i].homeTeam.name+"",
+                                        results.matches[i].awayTeam.name+"", score1, score2
+                                    )
+                                    doAsync {
+                                        App.getInstance(this@HomeInteractor).fixtureDao().insert(fixtureEntity)
+                                        uiThread {
 
-                                fixtureEntity = FixtureEntity(
-                                    results.matches[i].id,
-                                    results.matches.size.toString()+"",
-                                    results.matches[i].status+"", results.matches[i].homeTeam.name+"",
-                                    results.matches[i].awayTeam.name+"", results.matches[i].score.fullTime.homeTeam.toString()+"", results.matches[i].score.fullTime.awayTeam.toString()+""
-                                )
-                                doAsync {
-                                    App.getInstance(this@HomeInteractor).fixtureDao().insert(fixtureEntity)
-                                    uiThread {
-
+                                        }
                                     }
                                 }
+                                Log.d("okh", "$fixtureEntity new")
+
                             }
-                            Log.d("okh", "$fixtureEntity new")
 
-                        }
+                        },
+                            {
+                                Log.d("okherror", "" + it.message.toString())
+                            }
+                        )
+                    uiThread {
 
-                    },
-                        {
-                            Log.d("okherror", "" + it.message.toString())
-                        }
-                    )
-                uiThread {
-
+                    }
                 }
+            }catch (e : Exception){
+
             }
+
 
             return fixtureEntity
     }
@@ -105,43 +128,49 @@ class HomeInteractor : AppCompatActivity() {
 
     private fun createCompetitionList(): CompetitionEntity {
 
-        doAsync {
 
-            disposable = homeService.getCompetitions("fb72bfd14ba7494da1ccf73acd38afdd")
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
+       try {
+           doAsync {
 
-                    var count = results.count
-                    if (count != null) {
-                        for (i in 1 until count) {
+               disposable = homeService.getCompetitions("fb72bfd14ba7494da1ccf73acd38afdd")
+                   .subscribeOn(Schedulers.io())
+                   .observeOn(AndroidSchedulers.mainThread())
+                   .subscribe({ results ->
 
-                            competitionEntity = CompetitionEntity(
-                                results.competitions[i].id,
-                                results.count,
-                                results.competitions[i].name
-                            )
+                       var count = results.count
+                       if (count != null) {
+                           for (i in 1 until count) {
 
-                            doAsync {
-                                App.getInstance(this@HomeInteractor).competitionDao().insert(competitionEntity)
-                                uiThread {
+                               competitionEntity = CompetitionEntity(
+                                   results.competitions[i].id,
+                                   results.count,
+                                   results.competitions[i].name
+                               )
 
-                                }
-                            }
-                        }
-                        Log.d("okh", competitionEntity.toString())
+                               doAsync {
+                                   App.getInstance(this@HomeInteractor).competitionDao().insert(competitionEntity)
+                                   uiThread {
 
-                    }
+                                   }
+                               }
+                           }
+                           Log.d("okh", competitionEntity.toString())
 
-                },
-                    {
-                        Log.d("okh", "" + it.message.toString())
-                    }
-                )
-          uiThread {
+                       }
 
-          }
-        }
+                   },
+                       {
+                           Log.d("okh", "" + it.message.toString())
+                       }
+                   )
+               uiThread {
+
+               }
+           }
+       }catch (e : Exception){
+
+       }
+
 
         return competitionEntity
 }

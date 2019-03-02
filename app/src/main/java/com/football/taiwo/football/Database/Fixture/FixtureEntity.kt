@@ -14,6 +14,9 @@ data class FixtureEntity(
     @ColumnInfo(name = "count")
     var fixtureCount: String,
 
+    @ColumnInfo(name = "time")
+    var fixtureTime: String,
+
     @ColumnInfo(name = "status")
         var fixtureStatus: String,
 

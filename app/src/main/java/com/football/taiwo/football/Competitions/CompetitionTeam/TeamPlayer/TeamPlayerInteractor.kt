@@ -8,6 +8,7 @@ import com.football.taiwo.football.Home.Apicalls
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import org.jetbrains.anko.doAsync
+import org.jetbrains.anko.toast
 
 class TeamPlayerInteractor : AppCompatActivity() {
 
@@ -35,61 +36,67 @@ class TeamPlayerInteractor : AppCompatActivity() {
         var playerShirt = mutableListOf("")
 
         Log.d("okh", "$teamId competitionId")
-        doAsync {
-            homeService.getTeamPlayers("fb72bfd14ba7494da1ccf73acd38afdd", teamId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe({ results ->
 
-                    val size = results.squad.size
-                    for (i in 1 until size) {
-                        if (results.crestUrl == null){
-                            results.crestUrl = ""
-                        }
-                        if (results.squad[i].shirtNumber == null){
-                            results.squad[i].shirtNumber = i
-                        }
-                        if (results.squad[i].position == null){
-                            results.squad[i].position = ""
-                        }
-                        if (results.squad[i].id == null){
-                            results.squad[i].id = 0
-                        }
-                        if (results.name == null){
-                            results.name = ""
-                        }
-                        names.add(i, results.name.toString())
-                        playerId.add(i, results.squad[i].id)
-                        playerName.add(i, results.squad[i].name.toString())
-                        playerPosition.add(i, results.squad[i].position.toString())
-                        teamLogo.add(i, results.crestUrl.toString())
-                        playerShirt.add(i, results.squad[i].shirtNumber.toString())
-                    }
+        try {
+            doAsync {
+                homeService.getTeamPlayers("fb72bfd14ba7494da1ccf73acd38afdd", teamId)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe({ results ->
 
-                    doAsync {
-                        for (i in 1 until names.size) {
-                            teamPlayersEntity = TeamPlayersEntity(
-                                playerId[i],
-                                names[i],
-                                playerName[i],
-                                playerShirt[i],
-                                playerPosition[i],  teamId,
-                                teamLogo[i]
-                            )
-                            Log.d("okh", "$teamPlayersEntity teamPlayers")
-                            App.getInstance(this@TeamPlayerInteractor).teamPlayerDao().insert(teamPlayersEntity)
-
+                        val size = results.squad.size
+                        for (i in 1 until size) {
+                            if (results.crestUrl == null){
+                                results.crestUrl = ""
+                            }
+                            if (results.squad[i].shirtNumber == null){
+                                results.squad[i].shirtNumber = i
+                            }
+                            if (results.squad[i].position == null){
+                                results.squad[i].position = ""
+                            }
+                            if (results.squad[i].id == null){
+                                results.squad[i].id = 0
+                            }
+                            if (results.name == null){
+                                results.name = ""
+                            }
+                            names.add(i, results.name.toString())
+                            playerId.add(i, results.squad[i].id)
+                            playerName.add(i, results.squad[i].name.toString())
+                            playerPosition.add(i, results.squad[i].position.toString())
+                            teamLogo.add(i, results.crestUrl.toString())
+                            playerShirt.add(i, results.squad[i].shirtNumber.toString())
                         }
-                    }
+
+                        doAsync {
+                            for (i in 1 until names.size) {
+                                teamPlayersEntity = TeamPlayersEntity(
+                                    playerId[i],
+                                    names[i],
+                                    playerName[i],
+                                    playerShirt[i],
+                                    playerPosition[i],  teamId,
+                                    teamLogo[i]
+                                )
+                                Log.d("okh", "$teamPlayersEntity teamPlayers")
+                                App.getInstance(this@TeamPlayerInteractor).teamPlayerDao().insert(teamPlayersEntity)
+
+                            }
+                        }
 
 
-                },
-                    {
-                        Log.d("okherror", "" + it.localizedMessage.toString())
-                    }
-                )
+                    },
+                        {
+                            Log.d("okherror", "" + it.localizedMessage.toString())
+                        }
+                    )
+
+            }
+        }catch (e : Exception){
 
         }
+
 
         return 2
     }

@@ -4,9 +4,12 @@ import com.football.taiwo.football.Database.Competition.CompetitionEntity
 import com.football.taiwo.football.Database.Fixture.FixtureEntity
 
 interface HomeView {
+
+    //the HomeView interfaces
+
     fun showShimmer()
     fun stopShimmer()
-    fun setFixtureItems(items: FixtureEntity)
-    fun setCompetitionItems(items: CompetitionEntity)
+    fun setFixtureItems()
+    fun setCompetitionItems()
     fun openCompetitionsPage(competitionID : Int, competitionName: String)
 }

@@ -35,6 +35,7 @@ class FixtureAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Fixtu
         var card_view :  androidx.cardview.widget.CardView? = null
 
         init {
+            super.itemView
             this.fixtureStatus = v.findViewById(R.id.fixtureStatus)
             this.fixtureTime = v.findViewById(R.id.fixtureTime)
             this. fixtureMD = v.findViewById(R.id.fixtureMD)
@@ -63,6 +64,7 @@ class FixtureAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Fixtu
         val item = fixureList!![position]
         holder.fixtureScore1!!.text = item.fixtureHomeTeamScore
         holder.fixtureScore2!!.text = item.fixtureAwayTeamScore
+        holder.fixtureTime!!.text = item.fixtureTime
         holder.fixtureTeam1!!.text = item.fixtureHomeTeam
         holder.fixtureTeam2!!.text = item.fixtureAwayTeam
         Log.d("okh", "bind"+item.fixtureAwayTeam)
@@ -70,7 +72,12 @@ class FixtureAdapter() : androidx.recyclerview.widget.RecyclerView.Adapter<Fixtu
         holder.fixtureStatus!!.text = item.fixtureStatus
         holder.fixtureExtra!!.text = item.fixtureID.toString()
         holder.card_view!!.setOnClickListener { listener(position, fixureList!!) }
+
     }
 
+    fun setItems(fixtureList : MutableList<FixtureEntity>){
+        this.fixureList = fixtureList
+        notifyDataSetChanged()
+    }
 
 }

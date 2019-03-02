@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NavUtils
 import androidx.fragment.app.Fragment
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableFragment
 import com.football.taiwo.football.Competitions.CompetitionTable.CompetitionTableView
@@ -86,6 +87,11 @@ class Competition : AppCompatActivity(), CompetitionTableView {
         val id = item.itemId
 
         if (id == R.id.action_settings) {
+            return true
+        }
+
+        if (id == android.R.id.home) {
+            finish()
             return true
         }
 

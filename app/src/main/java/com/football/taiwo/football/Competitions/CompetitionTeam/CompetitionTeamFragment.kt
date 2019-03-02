@@ -25,7 +25,7 @@ class CompetitionTeamFragment : androidx.fragment.app.Fragment(), CompetitionTea
 
     override fun setTeams(competititonId : Int) {
         doAsync {
-            var teamsList =   App.getInstance(context!!).teamsDao().allTeams(2013)
+            var teamsList =   App.getInstance(context!!).teamsDao().allTeams(competititonId)
             Log.d("okh", "$teamsList from teamfragment")
 
             uiThread {

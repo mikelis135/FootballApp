@@ -18,6 +18,9 @@ class CompetitionFixturePresenter(var competitionView: CompetitionFixtureView, v
      }
 
     override fun onLoadFinished() {
+        competitionView.apply {
+            stopShimmer()
+        }
      }
 
     private fun onCompetitionsFixtureLoaded(items: MutableList<CompetitionFixtureModel>) {
